@@ -27,10 +27,10 @@ public class Menu {
         switch (menu) {
             case 1:
                 selectTaskForAdministrator();
-                break;
+                return;
             case 2:
                 selectTaskForProductOwner();
-                break;
+                return;
             case 3:
                 System.out.println();
                 System.out.println("--------------------------------------- END ---------------------------------------");
@@ -59,16 +59,16 @@ public class Menu {
         switch (menu) {
             case 1:
                 System.out.println("JZ6AM-4 (Create a new User)");
-                break;
+                return;
             case 2:
                 System.out.println("JZ6AM-5 (Create a new Project)");
-                break;
+                return;
             case 3:
                 System.out.println("JZ6AM-7 (Edit task in Backlog)");
-                break;
+                return;
             case 4:
                 selectRole();
-                break;
+                return;
             case 5:
                 System.out.println();
                 System.out.println("--------------------------------------- END ---------------------------------------");
@@ -101,16 +101,16 @@ public class Menu {
         switch (menu) {
             case 1:
                 System.out.println("JZ6AM-6 (Load task into project backlog)");
-                break;
+                return;
             case 2:
                 System.out.println("JZ6AM-7 (Edit task in Backlog)");
-                break;
+                return;
             case 3:
                 System.out.println("JZ6AM-8 (Create a new Sprint)");
-                break;
+                return;
             case 4:
                 selectRole();
-                break;
+                return;
             case 5:
                 System.out.println();
                 System.out.println("--------------------------------------- END ---------------------------------------");
