@@ -1,7 +1,11 @@
+import user.UserController;
+
 import java.io.IOException;
 import java.util.Scanner;
 
 public class Menu {
+
+    UserController userController = new UserController();
 
     //wzorzec 'template'
     private Menu() {
@@ -26,10 +30,10 @@ public class Menu {
         switch (menu) {
             case 1:
                 selectTaskForAdministrator();
-                return;
+                break;
             case 2:
                 selectTaskForProductOwner();
-                return;
+                break;
             case 3:
                 System.out.println();
                 System.out.println("--------------------------------------- END ---------------------------------------");
@@ -61,17 +65,17 @@ public class Menu {
 
         switch (menu) {
             case 1:
-                System.out.println("JZ6AM-4 (Create a new User)");
-                return;
+                userController.handleUserInput();
+                break;
             case 2:
                 System.out.println("JZ6AM-5 (Create a new Project)");
-                return;
+                break;
             case 3:
                 System.out.println("JZ6AM-7 (Edit task in Backlog)");
-                return;
+                break;
             case 4:
                 selectRole();
-                return;
+                break;
             case 5:
                 System.out.println();
                 System.out.println("--------------------------------------- END ---------------------------------------");
@@ -104,16 +108,16 @@ public class Menu {
         switch (menu) {
             case 1:
                 System.out.println("JZ6AM-6 (Load task into project backlog)");
-                return;
+                break;
             case 2:
                 System.out.println("JZ6AM-7 (Edit task in Backlog)");
-                return;
+                break;
             case 3:
                 System.out.println("JZ6AM-8 (Create a new Sprint)");
-                return;
+                break;
             case 4:
                 selectRole();
-                return;
+                break;
             case 5:
                 System.out.println();
                 System.out.println("--------------------------------------- END ---------------------------------------");
