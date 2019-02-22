@@ -38,6 +38,11 @@ public class Menu {
             default:
                 System.out.println("Incorrect digit. Please try again.");
         }
+        System.out.println();
+        System.out.println("Press Enter to continue...");
+        inRead();
+
+        selectRole();
     }
 
     private void selectTaskForAdministrator() {
