@@ -21,8 +21,7 @@ public class Menu {
         System.out.println("  2 - Product Owner");
         System.out.println("  3 - QUIT APP");
 
-        Scanner scanner = new Scanner(System.in);
-        Integer menu = scanner.nextInt();
+        int menu = enterKey();
 
         switch (menu) {
             case 1:
@@ -37,8 +36,13 @@ public class Menu {
                 System.out.println();
                 return;
             default:
-                System.out.println("Please try again");
+                System.out.println("Incorrect digit. Please try again.");
         }
+        System.out.println();
+        System.out.println("Press Enter to continue...");
+        inRead();
+
+        selectRole();
     }
 
     private void selectTaskForAdministrator() {
@@ -53,8 +57,7 @@ public class Menu {
         System.out.println("  4 - Back to main menu");
         System.out.println("  5 - QUIT APP");
 
-        Scanner scanner = new Scanner(System.in);
-        Integer menu = scanner.nextInt();
+        int menu = enterKey();
 
         switch (menu) {
             case 1:
@@ -75,7 +78,7 @@ public class Menu {
                 System.out.println();
                 return;
             default:
-                System.out.println("Please try again");
+                System.out.println("Incorrect digit. Please try again.");
         }
         System.out.println();
         System.out.println("Press Enter to continue...");
@@ -83,6 +86,7 @@ public class Menu {
 
         selectTaskForAdministrator();
     }
+
     private void selectTaskForProductOwner() {
 
         System.out.println("-----------------------------------------------------------------------------------");
@@ -95,8 +99,7 @@ public class Menu {
         System.out.println("  4 - Back to main menu");
         System.out.println("  5 - QUIT APP");
 
-        Scanner scanner = new Scanner(System.in);
-        Integer menu = scanner.nextInt();
+        int menu = enterKey();
 
         switch (menu) {
             case 1:
@@ -117,7 +120,7 @@ public class Menu {
                 System.out.println();
                 return;
             default:
-                System.out.println("Please try again");
+                System.out.println("Incorrect digit. Please try again.");
         }
         System.out.println();
         System.out.println("Press Enter to continue...");
@@ -132,6 +135,17 @@ public class Menu {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private int enterKey() {
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        int menu = 0;
+        try {
+            menu = Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+        }
+        return menu;
     }
 
     //metoda wytwórcza
