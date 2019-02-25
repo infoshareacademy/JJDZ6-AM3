@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Menu {
 
-    UserController userController = new UserController();
+    private UserController userController = new UserController();
 
     //wzorzec 'template'
     private Menu() {
@@ -65,7 +65,7 @@ public class Menu {
 
         switch (menu) {
             case 1:
-                userController.handleUserInput();
+                userController.createUser();
                 break;
             case 2:
                 System.out.println("JZ6AM-5 (Create a new Project)");
