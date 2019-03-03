@@ -12,6 +12,8 @@ public class Menu {
         selectRole();
     }
 
+
+
     private void selectRole() {
 
         System.out.println();
@@ -38,7 +40,7 @@ public class Menu {
                 System.out.println();
                 System.out.println("--------------------------------------- END ---------------------------------------");
                 System.out.println();
-                return;
+                System.exit(0);
             default:
                 System.out.println("Incorrect digit. Please try again.");
         }
@@ -80,7 +82,7 @@ public class Menu {
                 System.out.println();
                 System.out.println("--------------------------------------- END ---------------------------------------");
                 System.out.println();
-                return;
+                System.exit(0);
             default:
                 System.out.println("Incorrect digit. Please try again.");
         }
@@ -122,7 +124,7 @@ public class Menu {
                 System.out.println();
                 System.out.println("--------------------------------------- END ---------------------------------------");
                 System.out.println();
-                return;
+                System.exit(0);
             default:
                 System.out.println("Incorrect digit. Please try again.");
         }
