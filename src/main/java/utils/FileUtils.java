@@ -14,7 +14,7 @@ import java.nio.file.Paths;
 
 public class FileUtils {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-    private static final String USERS_JSON_FILE = Paths.get( "." + File.separator+ "Users.json").toString();
+    private static final String USERS_JSON_FILE = Paths.get( "Users.json").toString();
 
 
     public static void saveUsersToJsonFile(Users users) {
