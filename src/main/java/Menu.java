@@ -1,3 +1,4 @@
+import backlog.BacklogController;
 import user.UserController;
 
 import java.io.IOException;
@@ -6,6 +7,7 @@ import java.util.Scanner;
 public class Menu {
 
     private UserController userController = new UserController();
+    private BacklogController backlogController = new BacklogController();
 
     //wzorzec 'template'
     private Menu() {
@@ -61,7 +63,8 @@ public class Menu {
         System.out.println("  2 - Create a new Project");
         System.out.println("  3 - Edit task in Backlog");
         System.out.println("  4 - Back to main menu");
-        System.out.println("  5 - QUIT APP");
+        System.out.println("  5 - Import tasks");
+        System.out.println("  6 - QUIT APP");
 
         int menu = enterKey();
 
@@ -79,6 +82,9 @@ public class Menu {
                 selectRole();
                 break;
             case 5:
+                backlogController.importTasks();
+                break;
+            case 6:
                 System.out.println();
                 System.out.println("--------------------------------------- END ---------------------------------------");
                 System.out.println();
