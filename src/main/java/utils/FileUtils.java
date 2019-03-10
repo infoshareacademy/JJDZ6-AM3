@@ -10,7 +10,8 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class FileUtils {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
@@ -24,16 +25,16 @@ public class FileUtils {
         }
     }
 
-    public static <T> ArrayList<T> readListFromJsonFile(String path) {
+    public static <T> List<T> readListFromJsonFile(String path) {
         try (Reader reader = new FileReader(path)) {
             System.out.println("Reading from json file: " + path);
-            Type collectionType = new TypeToken<ArrayList<T>>() {}.getType();
-            ArrayList<T> collection = GSON.fromJson(reader, collectionType);
+            Type collectionType = new TypeToken<List<T>>() {}.getType();
+            List<T> collection = GSON.fromJson(reader, collectionType);
             System.out.println("List successfully uploaded. Number of elements: " + collection.size());
             return collection;
         } catch (IOException e) {
             System.out.println("File not found or broken: " + e.getMessage());
-            return new <T> ArrayList<T>();
+            return Collections.emptyList();
         }
     }
 }
