@@ -2,8 +2,6 @@ package utils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -25,10 +23,9 @@ public class FileUtils {
         }
     }
 
-    public static <T> List<T> readListFromJsonFile(String path) {
+    public static <T> List<T> readListFromJsonFile(String path, Type collectionType) {
         try (Reader reader = new FileReader(path)) {
             System.out.println("Reading from json file: " + path);
-            Type collectionType = new TypeToken<List<T>>() {}.getType();
             List<T> collection = GSON.fromJson(reader, collectionType);
             System.out.println("List successfully uploaded. Number of elements: " + collection.size());
             return collection;

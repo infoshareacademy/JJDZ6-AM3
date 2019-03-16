@@ -27,7 +27,8 @@ public class Menu {
         System.out.println("  Choose:");
         System.out.println("  1 - Administrator");
         System.out.println("  2 - Product Owner");
-        System.out.println("  3 - QUIT APP");
+        System.out.println("  3 - Show Backlog");
+        System.out.println("  4 - QUIT APP");
 
         int menu = enterKey();
 
@@ -39,6 +40,9 @@ public class Menu {
                 selectTaskForProductOwner();
                 break;
             case 3:
+                backlogController.showBacklogTasks();
+                break;
+            case 4:
                 System.out.println();
                 System.out.println("--------------------------------------- END ---------------------------------------");
                 System.out.println();
