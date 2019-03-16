@@ -4,7 +4,7 @@ import user.model.User;
 import utils.FileUtils;
 
 import java.nio.file.Paths;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class UserController {
@@ -14,7 +14,7 @@ public class UserController {
 
     public void createUser() {
 
-        ArrayList<User> users = FileUtils.readListFromJsonFile(USERS_JSON_FILE);
+        List<User> users = FileUtils.readListFromJsonFile(USERS_JSON_FILE);
 
         System.out.println("Please type user full name");
         String fullName = scanner.nextLine();
