@@ -1,0 +1,11 @@
+[
+  {
+    "title": "Some Bug",
+    "issueType": "BUG",
+    "description": "not working!",
+    "acceptanceCriteria": [
+      "working again"
+    ],
+    "priority": "HIGH"
+  }
+]

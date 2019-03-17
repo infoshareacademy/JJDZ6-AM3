@@ -66,8 +66,8 @@ public class Menu {
         System.out.println("  1 - Create a new User");
         System.out.println("  2 - Create a new Project");
         System.out.println("  3 - Edit task in Backlog");
-        System.out.println("  4 - Back to main menu");
-        System.out.println("  5 - Import tasks");
+        System.out.println("  4 - Import tasks");
+        System.out.println("  5 - Back to main menu");
         System.out.println("  6 - QUIT APP");
 
         int menu = enterKey();
@@ -83,10 +83,10 @@ public class Menu {
                 System.out.println("JZ6AM-7 (Edit task in Backlog)");
                 break;
             case 4:
-                selectRole();
+                backlogController.importTasks();
                 break;
             case 5:
-                backlogController.importTasks();
+                selectRole();
                 break;
             case 6:
                 System.out.println();
