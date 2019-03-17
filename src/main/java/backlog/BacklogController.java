@@ -1,6 +1,7 @@
 package backlog;
 
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.StringUtils;
 import userstory.UserStory;
 import utils.FileUtils;
 
@@ -37,7 +38,7 @@ public class BacklogController {
             return;
         }
         String path = IMPORT_FILE.toString();
-        List<UserStory> backlog = FileUtils.readListFromJsonFile(BACKLOG_JSON_FILE,collectionType);
+        List<UserStory> backlog = FileUtils.readListFromJsonFile(BACKLOG_JSON_FILE, collectionType);
         List<UserStory> importedStories = FileUtils.readListFromJsonFile(path, collectionType);
 
         backlog.addAll(importedStories);
@@ -48,15 +49,19 @@ public class BacklogController {
     public void showBacklogTasks() {
         List<UserStory> backlog = FileUtils.readListFromJsonFile(BACKLOG_JSON_FILE, collectionType);
 
-        String leftAlignFormat = "| %-15s | %-7s | %-20s |%n";
+        String leftAlignFormat = "| %-25s | %-7s | %-20s |%n";
 
-        System.out.format("+-----------------+---------+----------------------+%n");
-        System.out.format("| Title           | Type    | Description          |%n");
-        System.out.format("+-----------------+---------+----------------------+%n");
+        System.out.format("+---------------------------+---------+----------------------+%n");
+        System.out.format("| Title                     | Type    | Description          |%n");
+        System.out.format("+---------------------------+---------+----------------------+%n");
 
         for (UserStory userStory : backlog) {
-            System.out.format(leftAlignFormat, userStory.getTitle(), userStory.getIssueType().getType(),userStory.getDescription());
+            String title = StringUtils.abbreviate(userStory.getTitle(), 25);
+            String type = StringUtils.abbreviate(userStory.getIssueType().getType(), 7);
+            String description = StringUtils.abbreviate(userStory.getDescription(), 20);
+
+            System.out.format(leftAlignFormat, title, type, description);
         }
-        System.out.format("+-----------------+---------+----------------------+%n");
+        System.out.format("+---------------------------+---------+----------------------+%n");
     }
 }
