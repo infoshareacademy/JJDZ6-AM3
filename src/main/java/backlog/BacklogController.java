@@ -13,9 +13,9 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class BacklogController {
-
-    private static final String BACKLOG_JSON_FILE = Paths.get("Backlog.json").toString();
-    private static final Path IMPORT_FILE = Paths.get("user-stories.json");
+    private static final String DIRECTORY = System.getProperty("user.dir");
+    private static final String BACKLOG_JSON_FILE = Paths.get(DIRECTORY + "/Backlog.json").toString();
+    private static final Path IMPORT_FILE = Paths.get(DIRECTORY+ "/user-stories.json");
     private static final Type collectionType = new TypeToken<List<UserStory>>() {}.getType();
 
     private void inRead() {
