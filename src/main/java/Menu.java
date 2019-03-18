@@ -1,3 +1,4 @@
+import backlog.BacklogController;
 import user.UserController;
 
 import java.io.IOException;
@@ -6,6 +7,7 @@ import java.util.Scanner;
 public class Menu {
 
     private UserController userController = new UserController();
+    private BacklogController backlogController = new BacklogController();
 
     //wzorzec 'template'
     private Menu() {
@@ -25,7 +27,8 @@ public class Menu {
         System.out.println("  Choose:");
         System.out.println("  1 - Administrator");
         System.out.println("  2 - Product Owner");
-        System.out.println("  3 - QUIT APP");
+        System.out.println("  3 - Show Backlog");
+        System.out.println("  4 - QUIT APP");
 
         int menu = enterKey();
 
@@ -37,6 +40,9 @@ public class Menu {
                 selectTaskForProductOwner();
                 break;
             case 3:
+                backlogController.showBacklogTasks();
+                break;
+            case 4:
                 System.out.println();
                 System.out.println("--------------------------------------- END ---------------------------------------");
                 System.out.println();
@@ -60,8 +66,9 @@ public class Menu {
         System.out.println("  1 - Create a new User");
         System.out.println("  2 - Create a new Project");
         System.out.println("  3 - Edit task in Backlog");
-        System.out.println("  4 - Back to main menu");
-        System.out.println("  5 - QUIT APP");
+        System.out.println("  4 - Import tasks");
+        System.out.println("  5 - Back to main menu");
+        System.out.println("  6 - QUIT APP");
 
         int menu = enterKey();
 
@@ -76,9 +83,12 @@ public class Menu {
                 System.out.println("JZ6AM-7 (Edit task in Backlog)");
                 break;
             case 4:
-                selectRole();
+                backlogController.importTasks();
                 break;
             case 5:
+                selectRole();
+                break;
+            case 6:
                 System.out.println();
                 System.out.println("--------------------------------------- END ---------------------------------------");
                 System.out.println();
