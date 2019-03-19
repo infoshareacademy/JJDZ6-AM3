@@ -1,4 +1,5 @@
 import backlog.BacklogController;
+import sprint.Sprint;
 import user.UserController;
 
 import java.io.IOException;
@@ -8,11 +9,13 @@ public class Menu {
 
     private UserController userController = new UserController();
     private BacklogController backlogController = new BacklogController();
+    private Sprint sprint = new Sprint();
 
     //wzorzec 'template'
     private Menu() {
         selectRole();
     }
+
 
 
 
@@ -125,7 +128,8 @@ public class Menu {
                 System.out.println("JZ6AM-7 (Edit task in Backlog)");
                 break;
             case 3:
-                System.out.println("JZ6AM-8 (Create a new Sprint)");
+//                System.out.println("JZ6AM-8 (Create a new Sprint)");
+                sprint.newSprint();
                 break;
             case 4:
                 selectRole();
