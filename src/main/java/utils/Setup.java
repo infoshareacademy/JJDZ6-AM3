@@ -1,5 +1,7 @@
 package utils;
 
+import sprint.Sprint;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -10,6 +12,7 @@ public abstract class Setup {
     private static final String DIRECTORY = System.getProperty("user.dir");
     private static final Path USERS_JSON_FILE = Paths.get(DIRECTORY + "/Users.json");
     private static final Path BACKLOG_JSON_FILE = Paths.get(DIRECTORY + "/Backlog.json");
+    private static final Path SPRINT_JSON_FILE = Paths.get(DIRECTORY + "/Sprint.json");
 
     public static void init() throws IOException {
         if (!Files.exists(USERS_JSON_FILE)) {
@@ -19,6 +22,10 @@ public abstract class Setup {
         if (!Files.exists(BACKLOG_JSON_FILE)) {
             InputStream resourceAsStream = Setup.class.getResourceAsStream("backlog.json");
             Files.copy(resourceAsStream, BACKLOG_JSON_FILE);
+        }
+        if (!Files.exists(SPRINT_JSON_FILE)) {
+            InputStream resourceAsStream = Setup.class.getResourceAsStream("sprint.json");
+            Files.copy(resourceAsStream, SPRINT_JSON_FILE);
         }
     }
 

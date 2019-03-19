@@ -5,17 +5,35 @@ import backlog.BacklogController;
 import java.util.Scanner;
 
 public class Sprint {
+    String sprintName;
+
+    public Sprint() {
+    }
+
+    public Sprint(String sprintName) {
+        this.sprintName = sprintName;
+
+    }
+
+    public String getSprintName() {
+        return sprintName;
+    }
+
+
+    public void setSprintName(String sprintName) {
+        this.sprintName = sprintName;
+    }
     private Scanner scaner = new Scanner(System.in);
 
     public void newSprint(){
         BacklogController backlogController = new BacklogController();
         System.out.println("JZ6AM-8 (Create a new Sprint)");
         System.out.println("Please type Sprint name");
-        String sprintName = scaner.nextLine();
-        System.out.println(sprintName);
+        String setSprintName = scaner.nextLine();
+        System.out.println(getSprintName());
 
 
-        backlogController.showBacklogTasks(23);
+        backlogController.showBacklogTasks(23); // 23 = Tree menu choice 2 -> 3
 
 
     }

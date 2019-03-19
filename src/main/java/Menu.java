@@ -1,5 +1,6 @@
 import backlog.BacklogController;
 import sprint.Sprint;
+import sprint.SprintController;
 import user.UserController;
 
 import java.io.IOException;
@@ -9,7 +10,7 @@ public class Menu {
 
     private UserController userController = new UserController();
     private BacklogController backlogController = new BacklogController();
-    private Sprint sprint = new Sprint();
+    private SprintController sprintController = new SprintController();
 
     //wzorzec 'template'
     private Menu() {
@@ -129,7 +130,7 @@ public class Menu {
                 break;
             case 3:
 //                System.out.println("JZ6AM-8 (Create a new Sprint)");
-                sprint.newSprint();
+                sprintController.createSprint();
                 break;
             case 4:
                 selectRole();
