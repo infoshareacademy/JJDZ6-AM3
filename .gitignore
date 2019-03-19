@@ -126,5 +126,6 @@ buildNumber.properties
 
 Users.json
 Backlog.json
+Sprint.json
 
 # End of https://www.gitignore.io/api/maven,macos,intellij
