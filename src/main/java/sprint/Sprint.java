@@ -1,10 +1,21 @@
 package sprint;
 
+import backlog.BacklogController;
+
+import java.util.Scanner;
+
 public class Sprint {
+    private Scanner scaner = new Scanner(System.in);
+
     public void newSprint(){
+        BacklogController backlogController = new BacklogController();
         System.out.println("JZ6AM-8 (Create a new Sprint)");
+        System.out.println("Please type Sprint name");
+        String sprintName = scaner.nextLine();
+        System.out.println(sprintName);
 
 
+        backlogController.showBacklogTasks(23);
 
 
     }
