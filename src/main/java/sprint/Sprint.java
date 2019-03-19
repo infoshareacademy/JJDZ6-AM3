@@ -2,18 +2,19 @@ package sprint;
 
 import backlog.BacklogController;
 
+import java.time.LocalDate;
 import java.util.Date;
-import java.util.Scanner;
+
 
 public class Sprint {
     String sprintName;
-    Date sprintEndDate;
+    LocalDate sprintEndDate;
 
 
     public Sprint() {
     }
 
-    public Sprint(String sprintName,Date sprintEndDate ) {
+    public Sprint(String sprintName,LocalDate sprintEndDate ) {
         this.sprintName = sprintName;
         this.sprintEndDate = sprintEndDate;
 
@@ -29,11 +30,11 @@ public class Sprint {
         this.sprintName = sprintName;
     }
 
-    public Date getSprintEndDate() {
+    public LocalDate getSprintEndDate() {
         return sprintEndDate;
     }
 
-    public void setSprintEndDate(Date sprintEndDate) {
+    public void setSprintEndDate(LocalDate sprintEndDate) {
         this.sprintEndDate = sprintEndDate;
     }
 
