@@ -1,5 +1,6 @@
 package sprint;
 
+import backlog.Backlog;
 import backlog.BacklogController;
 
 import java.time.LocalDate;
@@ -52,10 +53,14 @@ public class Sprint {
         System.out.println("New Sprint " + getSprintName() + " should reach the target in date " + getSprintEndDate());
 
         System.out.println("Sprint Backlog to add");
-        backlogController.showBacklogTasks();
+        Backlog backlog = new Backlog();
+
+        System.out.println(backlog);
+
+
+//        backlogController.showBacklogTasks();    tabela wyświetlająca backlog
 
     }
-
 
 }
 
