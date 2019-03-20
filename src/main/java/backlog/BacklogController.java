@@ -66,23 +66,23 @@ public class BacklogController {
     }
 
 
-//    public void showBacklogTasks(int showSprint ) {
-//        List<UserStory> backlog = FileUtils.readListFromJsonFile(BACKLOG_JSON_FILE, collectionType);
-//        System.out.println("Sprint Backlog to add");
-//
-//        String leftAlignFormat = "| %-25s | %-7s | %-20s |%n";
-//
-//        System.out.format("+---------------------------+---------+----------------------+%n");
-//        System.out.format("| Title                     | Type    | Description          |%n");
-//        System.out.format("+---------------------------+---------+----------------------+%n");
-//
-//        for (UserStory userStory : backlog) {
-//            String title = StringUtils.abbreviate(userStory.getTitle(), 25);
-//            String type = StringUtils.abbreviate(userStory.getIssueType().getType(), 7);
-//            String description = StringUtils.abbreviate(userStory.getDescription(), 20);
-//
-//            System.out.format(leftAlignFormat, title, type, description);
-//        }
-//        System.out.format("+---------------------------+---------+----------------------+%n");
-//    }
+    public void showBacklogTasks(int showSprint ) {
+        List<UserStory> backlog = FileUtils.readListFromJsonFile(BACKLOG_JSON_FILE, collectionType);
+        System.out.println("Sprint Backlog to add");
+
+        String leftAlignFormat = "| %-25s | %-7s | %-20s |%n";
+
+        System.out.format("+---------------------------+---------+----------------------+%n");
+        System.out.format("| Title                     | Type    | Description          |%n");
+        System.out.format("+---------------------------+---------+----------------------+%n");
+
+        for (UserStory userStory : backlog) {
+            String title = StringUtils.abbreviate(userStory.getTitle(), 25);
+            String type = StringUtils.abbreviate(userStory.getIssueType().getType(), 7);
+            String description = StringUtils.abbreviate(userStory.getDescription(), 20);
+
+            System.out.format(leftAlignFormat, title, type, description);
+        }
+        System.out.format("+---------------------------+---------+----------------------+%n");
+    }
 }
