@@ -23,10 +23,7 @@ public abstract class Setup {
             InputStream resourceAsStream = Setup.class.getResourceAsStream("backlog.json");
             Files.copy(resourceAsStream, BACKLOG_JSON_FILE);
         }
-        if (!Files.exists(SPRINT_JSON_FILE)) {
-            InputStream resourceAsStream = Setup.class.getResourceAsStream("sprint.json");
-            Files.copy(resourceAsStream, SPRINT_JSON_FILE);
-        }
+
     }
 
 }
