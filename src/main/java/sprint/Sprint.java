@@ -49,8 +49,7 @@ public class Sprint {
             }
         }
 
-        System.out.println(getSprintName());
-        System.out.println(getSprintEndDate());
+        System.out.println("New Sprint " + getSprintName() + " should reach the target in date " + getSprintEndDate());
 
         System.out.println("Sprint Backlog to add");
         backlogController.showBacklogTasks();
