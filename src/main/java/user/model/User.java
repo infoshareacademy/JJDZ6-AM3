@@ -2,33 +2,33 @@ package user.model;
 
 public class User {
 
-    private String name;
-    private String surname;
+    private String fullName;
+    private String email;
     private String role;
 
     public User() {
     }
 
-    public User(String name, String surname, String role) {
-        this.name = name;
-        this.surname = surname;
+    public User(String fullName, String email, String role) {
+        this.fullName = fullName;
+        this.email = email;
         this.role = role;
     }
 
-    public String getName() {
-        return name;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getEmail() {
+        return email;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getRole() {
@@ -41,6 +41,6 @@ public class User {
 
     @Override
     public String toString() {
-        return "{" + "name='" + name + '\'' + ", surname='" + surname + '\'' + ", role='" + role + '\'' + '}';
+        return "{" + "fullName='" + fullName + '\'' + ", email='" + email + '\'' + ", role='" + role + '\'' + '}';
     }
 }
