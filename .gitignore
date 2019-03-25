@@ -123,4 +123,9 @@ buildNumber.properties
 .mvn/timing.properties
 .mvn/wrapper/maven-wrapper.jar
 
+## json db files ##
+
+Users.json
+Backlog.json
+
 # End of https://www.gitignore.io/api/maven,macos,intellij

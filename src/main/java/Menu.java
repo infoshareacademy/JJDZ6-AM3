@@ -1,12 +1,20 @@
+import backlog.BacklogController;
+import user.UserController;
+
 import java.io.IOException;
 import java.util.Scanner;
 
 public class Menu {
 
+    private UserController userController = new UserController();
+    private BacklogController backlogController = new BacklogController();
+
     //wzorzec 'template'
     private Menu() {
         selectRole();
     }
+
+
 
     private void selectRole() {
 
@@ -19,22 +27,26 @@ public class Menu {
         System.out.println("  Choose:");
         System.out.println("  1 - Administrator");
         System.out.println("  2 - Product Owner");
-        System.out.println("  3 - QUIT APP");
+        System.out.println("  3 - Show Backlog");
+        System.out.println("  4 - QUIT APP");
 
         int menu = enterKey();
 
         switch (menu) {
             case 1:
                 selectTaskForAdministrator();
-                return;
+                break;
             case 2:
                 selectTaskForProductOwner();
-                return;
+                break;
             case 3:
+                backlogController.showBacklogTasks();
+                break;
+            case 4:
                 System.out.println();
                 System.out.println("--------------------------------------- END ---------------------------------------");
                 System.out.println();
-                return;
+                System.exit(0);
             default:
                 System.out.println("Incorrect digit. Please try again.");
         }
@@ -54,29 +66,33 @@ public class Menu {
         System.out.println("  1 - Create a new User");
         System.out.println("  2 - Create a new Project");
         System.out.println("  3 - Edit task in Backlog");
-        System.out.println("  4 - Back to main menu");
-        System.out.println("  5 - QUIT APP");
+        System.out.println("  4 - Import tasks");
+        System.out.println("  5 - Back to main menu");
+        System.out.println("  6 - QUIT APP");
 
         int menu = enterKey();
 
         switch (menu) {
             case 1:
-                System.out.println("JZ6AM-4 (Create a new User)");
-                return;
+                userController.createUser();
+                break;
             case 2:
                 System.out.println("JZ6AM-5 (Create a new Project)");
-                return;
+                break;
             case 3:
                 System.out.println("JZ6AM-7 (Edit task in Backlog)");
-                return;
+                break;
             case 4:
-                selectRole();
-                return;
+                backlogController.importTasks();
+                break;
             case 5:
+                selectRole();
+                break;
+            case 6:
                 System.out.println();
                 System.out.println("--------------------------------------- END ---------------------------------------");
                 System.out.println();
-                return;
+                System.exit(0);
             default:
                 System.out.println("Incorrect digit. Please try again.");
         }
@@ -104,21 +120,21 @@ public class Menu {
         switch (menu) {
             case 1:
                 System.out.println("JZ6AM-6 (Load task into project backlog)");
-                return;
+                break;
             case 2:
                 System.out.println("JZ6AM-7 (Edit task in Backlog)");
-                return;
+                break;
             case 3:
                 System.out.println("JZ6AM-8 (Create a new Sprint)");
-                return;
+                break;
             case 4:
                 selectRole();
-                return;
+                break;
             case 5:
                 System.out.println();
                 System.out.println("--------------------------------------- END ---------------------------------------");
                 System.out.println();
-                return;
+                System.exit(0);
             default:
                 System.out.println("Incorrect digit. Please try again.");
         }
