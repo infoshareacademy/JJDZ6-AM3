@@ -35,8 +35,8 @@ public class ScrumProject {
         project.setFullNameOfProductOwner(scanner.nextLine());
 
         //list of developers
-        ReadModel readModel = new ReadModel();
-        readModel.getDeveloper();
+        Developer developer = new Developer();
+        developer.displayDevelopersList();
         project.setDeveloperName(scanner.nextLine());
         project.setKey(key);
 
