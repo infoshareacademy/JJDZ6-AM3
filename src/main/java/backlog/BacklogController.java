@@ -68,19 +68,20 @@ public class BacklogController {
     }
 
     public ArrayList showBacklogTasks(int x) {
+
+
         List<UserStory> backlog = FileUtils.readListFromJsonFile(BACKLOG_JSON_FILE, collectionType);
+
         ArrayList<String> listToSprint = new ArrayList<>();
 
         for (UserStory userStory : backlog) {
-
             String title = StringUtils.capitalize(userStory.getTitle());
             String type = StringUtils.capitalize(userStory.getIssueType().getType());
             String description = StringUtils.capitalize(userStory.getDescription());
+
             listToSprint.add(title);
             listToSprint.add(type);
             listToSprint.add(description);
-
-
         }
         return listToSprint;
     }

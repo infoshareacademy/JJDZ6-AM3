@@ -56,13 +56,14 @@ public class Sprint {
             }
         }
 
-        System.out.println("New Sprint " + getSprintName() + " should reach the target in date " + getSprintEndDate());
+        System.out.println("New Sprint \" " + getSprintName() + " \" should reach the target in date " + getSprintEndDate());
 
         System.out.println("Sprint Backlog to add");
-        System.out.println("Co to da " + toString());
+        ArrayList<String> listToSprint = backlogController.showBacklogTasks(23);  // 23 -> menu tree access
 
+        listToSprint.add(getSprintName());
 
-        System.out.println(backlogController.showBacklogTasks(23));  // 23 -> menu tree access
+        System.out.println(listToSprint);
 
 
     }
