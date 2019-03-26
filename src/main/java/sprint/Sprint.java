@@ -18,6 +18,7 @@ public class Sprint {
     LocalDate sprintEndDate;
     BacklogController backlogController = new BacklogController();
     List<String> newSprintList = new ArrayList<>();
+    UserStory userStory = new UserStory();
 
 
     public String getSprintName() {
@@ -61,8 +62,7 @@ public class Sprint {
         System.out.println("Co to da " + toString());
 
 
-
-        backlogController.showBacklogTasks();
+        System.out.println(backlogController.showBacklogTasks(23));
 
 
     }
