@@ -73,9 +73,9 @@ public class BacklogController {
 
         for (UserStory userStory : backlog) {
 
-            String title = StringUtils.abbreviate(userStory.getTitle(), 25);
-            String type = StringUtils.abbreviate(userStory.getIssueType().getType(), 7);
-            String description = StringUtils.abbreviate(userStory.getDescription(), 20);
+            String title = StringUtils.capitalize(userStory.getTitle());
+            String type = StringUtils.capitalize(userStory.getIssueType().getType());
+            String description = StringUtils.capitalize(userStory.getDescription());
             listToSprint.add(title);
             listToSprint.add(type);
             listToSprint.add(description);

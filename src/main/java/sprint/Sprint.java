@@ -62,7 +62,7 @@ public class Sprint {
         System.out.println("Co to da " + toString());
 
 
-        System.out.println(backlogController.showBacklogTasks(23));
+        System.out.println(backlogController.showBacklogTasks(23));  // 23 -> menu tree access
 
 
     }
