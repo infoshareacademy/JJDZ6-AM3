@@ -1,4 +1,5 @@
 import backlog.BacklogController;
+import scrum.ScrumProject;
 import user.UserController;
 
 import java.io.IOException;
@@ -8,6 +9,7 @@ public class Menu {
 
     private UserController userController = new UserController();
     private BacklogController backlogController = new BacklogController();
+    private ScrumProject scrumProject = new ScrumProject();
 
     //wzorzec 'template'
     private Menu() {
@@ -19,11 +21,11 @@ public class Menu {
     private void selectRole() {
 
         System.out.println();
-        System.out.println("----------------------------------- Scrum Board -----------------------------------");
+        System.out.println("------------------------------- Scrum Board -------------------------------");
         System.out.println();
-        System.out.println("                                     MAIN MENU                                     ");
+        System.out.println("                                 MAIN MENU                                 ");
         System.out.println();
-        System.out.println("-----------------------------------------------------------------------------------");
+        System.out.println("---------------------------------------------------------------------------");
         System.out.println("  Choose:");
         System.out.println("  1 - Administrator");
         System.out.println("  2 - Product Owner");
@@ -44,7 +46,7 @@ public class Menu {
                 break;
             case 4:
                 System.out.println();
-                System.out.println("--------------------------------------- END ---------------------------------------");
+                System.out.println("----------------------------------- END -----------------------------------");
                 System.out.println();
                 System.exit(0);
             default:
@@ -59,9 +61,9 @@ public class Menu {
 
     private void selectTaskForAdministrator() {
 
-        System.out.println("-----------------------------------------------------------------------------------");
-        System.out.println("                                 ADMINISTRATOR MENU                                ");
-        System.out.println("-----------------------------------------------------------------------------------");
+        System.out.println("---------------------------------------------------------------------------");
+        System.out.println("                             ADMINISTRATOR MENU                            ");
+        System.out.println("---------------------------------------------------------------------------");
         System.out.println("  Choose:");
         System.out.println("  1 - Create a new User");
         System.out.println("  2 - Create a new Project");
@@ -77,7 +79,7 @@ public class Menu {
                 userController.createUser();
                 break;
             case 2:
-                System.out.println("JZ6AM-5 (Create a new Project)");
+                scrumProject.createScrumProject();
                 break;
             case 3:
                 System.out.println("JZ6AM-7 (Edit task in Backlog)");
@@ -90,7 +92,7 @@ public class Menu {
                 break;
             case 6:
                 System.out.println();
-                System.out.println("--------------------------------------- END ---------------------------------------");
+                System.out.println("----------------------------------- END -----------------------------------");
                 System.out.println();
                 System.exit(0);
             default:
@@ -105,9 +107,9 @@ public class Menu {
 
     private void selectTaskForProductOwner() {
 
-        System.out.println("-----------------------------------------------------------------------------------");
-        System.out.println("                                   PRODUCT OWNER                                   ");
-        System.out.println("-----------------------------------------------------------------------------------");
+        System.out.println("---------------------------------------------------------------------------");
+        System.out.println("                               PRODUCT OWNER                               ");
+        System.out.println("---------------------------------------------------------------------------");
         System.out.println("  Choose:");
         System.out.println("  1 - Load task into project backlog");
         System.out.println("  2 - Edit task in Backlog");
@@ -132,7 +134,7 @@ public class Menu {
                 break;
             case 5:
                 System.out.println();
-                System.out.println("--------------------------------------- END ---------------------------------------");
+                System.out.println("----------------------------------- END -----------------------------------");
                 System.out.println();
                 System.exit(0);
             default:
