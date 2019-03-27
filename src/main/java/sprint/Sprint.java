@@ -65,7 +65,7 @@ public class Sprint {
         listToSprint.add(0,endDate);
         listToSprint.add(0,getSprintName());
 
-        System.out.println("Sprint Backlog to add");
+        System.out.println("Backlog add to new Sprint");
         System.out.println(listToSprint);
 
 
