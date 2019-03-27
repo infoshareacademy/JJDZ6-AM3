@@ -3,6 +3,8 @@ package scrum;
 import com.google.gson.reflect.TypeToken;
 import user.UserController;
 import utils.FileUtils;
+import utils.KeyGen;
+
 import java.lang.reflect.Type;
 import java.nio.file.Paths;
 import java.util.List;

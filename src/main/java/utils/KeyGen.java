@@ -1,4 +1,4 @@
-package scrum;
+package utils;
 
 import java.util.Random;
 
