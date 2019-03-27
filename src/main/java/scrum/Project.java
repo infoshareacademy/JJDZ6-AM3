@@ -8,7 +8,7 @@ public class Project {
     private String fullNameOfProject;
     private String key;
     private String fullNameOfProductOwner;
-    private String developerName;
+    private String developerFullName;
 
     public String getFullNameOfProject() {
         return fullNameOfProject;
@@ -34,12 +34,12 @@ public class Project {
         this.fullNameOfProductOwner = fullNameOfProductOwner;
     }
 
-    public String getDeveloperName() {
-        return developerName;
+    public String getDeveloperFullName() {
+        return developerFullName;
     }
 
-    public void setDeveloperName(String developerName) {
-        this.developerName = developerName;
+    public void setDeveloperFullName(String developerFullName) {
+        this.developerFullName = developerFullName;
     }
 
     @Override
@@ -48,7 +48,7 @@ public class Project {
                 "fullNameOfProject='" + fullNameOfProject + '\'' +
                 ", key='" + key + '\'' +
                 ", fullNameOfProductOwner='" + fullNameOfProductOwner + '\'' +
-                ", developerName='" + developerName + '\'' +
+                ", developerFullName='" + developerFullName + '\'' +
                 '}';
     }
 }

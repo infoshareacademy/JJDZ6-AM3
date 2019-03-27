@@ -1,6 +1,7 @@
 package scrum;
 
 import com.google.gson.reflect.TypeToken;
+import user.UserController;
 import utils.FileUtils;
 import java.lang.reflect.Type;
 import java.nio.file.Paths;
@@ -35,9 +36,9 @@ public class ScrumProject {
         project.setFullNameOfProductOwner(scanner.nextLine());
 
         //list of developers
-        Developer developer = new Developer();
-        developer.displayDevelopersList();
-        project.setDeveloperName(scanner.nextLine());
+        UserController user = new UserController();
+        user.getUserByRole();
+        project.setDeveloperFullName(scanner.nextLine());
         project.setKey(key);
 
         projects.add(project);
