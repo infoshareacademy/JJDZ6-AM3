@@ -56,13 +56,16 @@ public class Sprint {
             }
         }
 
-        System.out.println("New Sprint \" " + getSprintName() + " \" should reach the target in date " + getSprintEndDate());
+        System.out.println("New Sprint \"" + getSprintName() + "\" should reach the target in date " + getSprintEndDate());
 
-        System.out.println("Sprint Backlog to add");
         ArrayList<String> listToSprint = backlogController.showBacklogTasks(23);  // 23 -> menu tree access
 
-        listToSprint.add(getSprintName());
+        String endDate = String.valueOf(getSprintEndDate());
 
+        listToSprint.add(0,endDate);
+        listToSprint.add(0,getSprintName());
+
+        System.out.println("Sprint Backlog to add");
         System.out.println(listToSprint);
 
 
@@ -70,12 +73,3 @@ public class Sprint {
 
 }
 
-
-/*
-Product Owner > możliwość utworzenia nowego Sprintu
-    - dodania do niego zadań z Backlogu
-    - ustawić datę jego zakończenia
-
-Po rozpoczęciu Sprintu
-    - wszystkie zadania w Sprincie powinny automatycznie zostać zaktualizowane o numer Sprintu.
- */
