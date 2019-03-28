@@ -3,11 +3,33 @@ package userstory;
 import java.util.ArrayList;
 
 public class UserStory {
+
+    private static int counter = 0;
+
+    private int id;
     private String title;
     private Type issueType;
     private String description;
     private ArrayList<String> acceptanceCriteria;
     private Priority priority;
+    private Integer storyPoints;
+    private String State;
+
+    public Integer getStoryPoints() {
+        return storyPoints;
+    }
+
+    public void setStoryPoints(Integer storyPoints) {
+        this.storyPoints = storyPoints;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId() {
+        this.id = UserStory.counter++;
+    }
 
     public String getTitle() {
         return title;

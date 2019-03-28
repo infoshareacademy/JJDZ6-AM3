@@ -1,5 +1,8 @@
+package menu;
+
 import backlog.BacklogController;
 import scrum.ScrumProject;
+import backlog.BacklogMenu;
 import user.UserController;
 
 import java.io.IOException;
@@ -9,13 +12,13 @@ public class Menu {
 
     private UserController userController = new UserController();
     private BacklogController backlogController = new BacklogController();
+    private BacklogMenu backlogMenu = new BacklogMenu();
     private ScrumProject scrumProject = new ScrumProject();
 
     //wzorzec 'template'
     private Menu() {
         selectRole();
     }
-
 
 
     private void selectRole() {
@@ -43,6 +46,7 @@ public class Menu {
                 break;
             case 3:
                 backlogController.showBacklogTasks();
+                backlogMenu.selectOption();
                 break;
             case 4:
                 System.out.println();
@@ -67,10 +71,9 @@ public class Menu {
         System.out.println("  Choose:");
         System.out.println("  1 - Create a new User");
         System.out.println("  2 - Create a new Project");
-        System.out.println("  3 - Edit task in Backlog");
-        System.out.println("  4 - Import tasks");
-        System.out.println("  5 - Back to main menu");
-        System.out.println("  6 - QUIT APP");
+        System.out.println("  3 - Import tasks");
+        System.out.println("  4 - Back to main menu");
+        System.out.println("  5 - QUIT APP");
 
         int menu = enterKey();
 
@@ -82,15 +85,12 @@ public class Menu {
                 scrumProject.createScrumProject();
                 break;
             case 3:
-                System.out.println("JZ6AM-7 (Edit task in Backlog)");
-                break;
-            case 4:
                 backlogController.importTasks();
                 break;
-            case 5:
+            case 4:
                 selectRole();
                 break;
-            case 6:
+            case 5:
                 System.out.println();
                 System.out.println("----------------------------------- END -----------------------------------");
                 System.out.println();
@@ -147,7 +147,7 @@ public class Menu {
         selectTaskForProductOwner();
     }
 
-    private void inRead() {
+    public static void inRead() {
         try {
             System.in.read();
         } catch (IOException e) {
@@ -155,7 +155,7 @@ public class Menu {
         }
     }
 
-    private int enterKey() {
+    public static int enterKey() {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
         int menu = 0;
@@ -167,7 +167,7 @@ public class Menu {
     }
 
     //metoda wytwórcza
-    static public void startMenu() {
+    public static void startMenu() {
         new Menu();
     }
 }

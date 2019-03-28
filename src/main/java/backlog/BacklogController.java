@@ -11,11 +11,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class BacklogController {
     private static final String DIRECTORY = System.getProperty("user.dir");
     private static final String BACKLOG_JSON_FILE = Paths.get(DIRECTORY + "/Backlog.json").toString();
-    private static final Path IMPORT_FILE = Paths.get(DIRECTORY+ "/user-stories.json");
+    private static final Path IMPORT_FILE = Paths.get(DIRECTORY + "/user-stories.json");
     private static final Type collectionType = new TypeToken<List<UserStory>>() {}.getType();
 
     private void inRead() {
@@ -24,6 +25,34 @@ public class BacklogController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public List<UserStory> getTasks() {
+        return FileUtils.readListFromJsonFile(BACKLOG_JSON_FILE, collectionType);
+    }
+
+
+    private List<UserStory> enrichId(List<UserStory> backlog) {
+        return backlog.stream().map(x -> {
+            x.setId();
+            return x;
+        }).collect(Collectors.toList());
+    }
+
+    public List<UserStory> updateCollection(Integer id, UserStory updatedUserStory) {
+        return getTasks().stream()
+                .map(x -> {
+                    if (x.getId().equals(id)) {
+                        return updatedUserStory;
+                    }
+                    return x;
+                }).collect(Collectors.toList());
+    }
+
+    public UserStory findById(Integer id) {
+        return getTasks().stream()
+                .filter(x -> x.getId().equals(id))
+                .findAny().orElse(null);
     }
 
     public void importTasks() {
@@ -38,30 +67,31 @@ public class BacklogController {
             return;
         }
         String path = IMPORT_FILE.toString();
-        List<UserStory> backlog = FileUtils.readListFromJsonFile(BACKLOG_JSON_FILE, collectionType);
+        List<UserStory> backlog = getTasks();
         List<UserStory> importedStories = FileUtils.readListFromJsonFile(path, collectionType);
 
         backlog.addAll(importedStories);
 
-        FileUtils.saveListToJsonFile(backlog, BACKLOG_JSON_FILE);
+        FileUtils.saveListToJsonFile(enrichId(backlog), BACKLOG_JSON_FILE);
     }
 
     public void showBacklogTasks() {
         List<UserStory> backlog = FileUtils.readListFromJsonFile(BACKLOG_JSON_FILE, collectionType);
 
-        String leftAlignFormat = "| %-25s | %-7s | %-20s |%n";
+        String leftAlignFormat = "| %-2d | %-25s | %-7s | %-20s |%n";
 
-        System.out.format("+---------------------------+---------+----------------------+%n");
-        System.out.format("| Title                     | Type    | Description          |%n");
-        System.out.format("+---------------------------+---------+----------------------+%n");
+        System.out.format("+----+---------------------------+---------+----------------------+%n");
+        System.out.format("| ID | Title                     | Type    | Description          |%n");
+        System.out.format("+----+---------------------------+---------+----------------------+%n");
 
         for (UserStory userStory : backlog) {
+            Integer id = userStory.getId();
             String title = StringUtils.abbreviate(userStory.getTitle(), 25);
             String type = StringUtils.abbreviate(userStory.getIssueType().getType(), 7);
             String description = StringUtils.abbreviate(userStory.getDescription(), 20);
 
-            System.out.format(leftAlignFormat, title, type, description);
+            System.out.format(leftAlignFormat, id, title, type, description);
         }
-        System.out.format("+---------------------------+---------+----------------------+%n");
+        System.out.format("+----+---------------------------+---------+----------------------+%n");
     }
 }
