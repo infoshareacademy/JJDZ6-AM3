@@ -12,7 +12,7 @@ public class BacklogMenu {
         System.out.println();
         System.out.println("---------------------------------------------------------------------------");
         System.out.println();
-        System.out.println("                                     BACKLOG MENU                          ");
+        System.out.println("                                 BACKLOG MENU                              ");
         System.out.println();
         System.out.println("---------------------------------------------------------------------------");
         System.out.println("  Choose:");

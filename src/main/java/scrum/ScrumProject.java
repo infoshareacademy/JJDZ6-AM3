@@ -25,16 +25,16 @@ public class ScrumProject {
         Project project = new Project();
 
         //Project name
-        System.out.println("Please type project full name:");
+        System.out.println("Please type project full name: ");
         project.setFullNameOfProject(scanner.nextLine());
 
         //Key generator
         String key = KeyGen.getKey();
-        System.out.println("Key:");
+        System.out.println("Key: ");
         System.out.println(key);
 
         //Product Owner
-        System.out.println("Please type Product Owner full name");
+        System.out.println("Please type Product Owner full name: ");
         project.setFullNameOfProductOwner(scanner.nextLine());
 
         //list of developers
