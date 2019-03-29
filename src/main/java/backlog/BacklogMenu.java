@@ -10,11 +10,11 @@ public class BacklogMenu {
     public void selectOption() {
 
         System.out.println();
-        System.out.println("-----------------------------------------------------------------------------------");
+        System.out.println("---------------------------------------------------------------------------");
         System.out.println();
-        System.out.println("                                     BACKLOG MENU                                  ");
+        System.out.println("                                     BACKLOG MENU                          ");
         System.out.println();
-        System.out.println("-----------------------------------------------------------------------------------");
+        System.out.println("---------------------------------------------------------------------------");
         System.out.println("  Choose:");
         System.out.println("  1 - Update Task");
         System.out.println("  2 - Back to main menu");
@@ -30,7 +30,7 @@ public class BacklogMenu {
                 return;
             case 3:
                 System.out.println();
-                System.out.println("--------------------------------------- END ---------------------------------------");
+                System.out.println("----------------------------------- END -----------------------------------");
                 System.out.println();
                 System.exit(0);
             default:

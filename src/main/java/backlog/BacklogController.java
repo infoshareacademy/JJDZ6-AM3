@@ -78,11 +78,11 @@ public class BacklogController {
     public void showBacklogTasks() {
         List<UserStory> backlog = FileUtils.readListFromJsonFile(BACKLOG_JSON_FILE, collectionType);
 
-        String leftAlignFormat = "| %-2d | %-25s | %-7s | %-20s |%n";
+        String leftAlignFormat = "| %-2d | %-25s | %-7s | %-28s |%n";
 
-        System.out.format("+----+---------------------------+---------+----------------------+%n");
-        System.out.format("| ID | Title                     | Type    | Description          |%n");
-        System.out.format("+----+---------------------------+---------+----------------------+%n");
+        System.out.format("+----+---------------------------+---------+------------------------------+%n");
+        System.out.format("| ID | Title                     | Type    | Description                  |%n");
+        System.out.format("+----+---------------------------+---------+------------------------------+%n");
 
         for (UserStory userStory : backlog) {
             Integer id = userStory.getId();
@@ -92,6 +92,6 @@ public class BacklogController {
 
             System.out.format(leftAlignFormat, id, title, type, description);
         }
-        System.out.format("+----+---------------------------+---------+----------------------+%n");
+        System.out.format("+----+---------------------------+---------+------------------------------+%n");
     }
 }

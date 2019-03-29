@@ -34,7 +34,8 @@ public class UserStoryMenu {
         System.out.println("  1 - Update title");
         System.out.println("  2 - Update description");
         System.out.println("  3 - Estimate task");
-        System.out.println("  4 - QUIT APP");
+        System.out.println("  4 - Cancel");
+        System.out.println("  5 - QUIT APP");
 
         int menu = Menu.enterKey();
 
@@ -52,6 +53,8 @@ public class UserStoryMenu {
                 FileUtils.saveListToJsonFile(backlogController.updateCollection(id, updatedUserStoryWithNewEstimation), BACKLOG_JSON_FILE);
                 break;
             case 4:
+                return;
+            case 5:
                 System.out.println();
                 System.out.println("--------------------------------------- END ---------------------------------------");
                 System.out.println();
