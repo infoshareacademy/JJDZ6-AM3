@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class UserStory {
 
-    private static int counter = 0;
+    private static int counter = 1;
 
     private int id;
     private String title;
