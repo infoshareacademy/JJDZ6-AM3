@@ -63,8 +63,6 @@ public class UserStoryMenu {
                 System.out.println("Incorrect digit. Please try again.");
         }
         System.out.println();
-        System.out.println("Press Enter to continue...");
-        Menu.inRead();
 
         selectOption(id, userStory);
     }

@@ -1,11 +1,10 @@
 package menu;
 
 import backlog.BacklogController;
-import scrum.ScrumProject;
 import backlog.BacklogMenu;
+import scrum.ScrumProject;
 import user.UserController;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class Menu {
@@ -57,8 +56,6 @@ public class Menu {
                 System.out.println("Incorrect digit. Please try again.");
         }
         System.out.println();
-        System.out.println("Press Enter to continue...");
-        inRead();
 
         selectRole();
     }
@@ -84,8 +81,7 @@ public class Menu {
                 scrumProject.createScrumProject();
                 break;
             case 3:
-                selectRole();
-                break;
+                return;
             case 4:
                 System.out.println();
                 System.out.println("----------------------------------- END -----------------------------------");
@@ -95,8 +91,6 @@ public class Menu {
                 System.out.println("Incorrect digit. Please try again.");
         }
         System.out.println();
-        System.out.println("Press Enter to continue...");
-        inRead();
 
         selectTaskForAdministrator();
     }
@@ -122,8 +116,7 @@ public class Menu {
                 System.out.println("JZ6AM-8 (Create a new Sprint)");
                 break;
             case 3:
-                selectRole();
-                break;
+                return;
             case 4:
                 System.out.println();
                 System.out.println("----------------------------------- END -----------------------------------");
@@ -133,18 +126,8 @@ public class Menu {
                 System.out.println("Incorrect digit. Please try again.");
         }
         System.out.println();
-        System.out.println("Press Enter to continue...");
-        inRead();
 
         selectTaskForProductOwner();
-    }
-
-    public static void inRead() {
-        try {
-            System.in.read();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public static int enterKey() {
