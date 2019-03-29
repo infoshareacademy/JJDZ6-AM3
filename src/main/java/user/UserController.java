@@ -7,7 +7,9 @@ import utils.FileUtils;
 import java.lang.reflect.Type;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 public class UserController {
 
@@ -33,6 +35,29 @@ public class UserController {
 
         FileUtils.saveListToJsonFile(users, USERS_JSON_FILE);
 
+    }
+
+    public void getUserByRole() {
+
+        List<User> users = FileUtils.readListFromJsonFile(USERS_JSON_FILE, collectionType);
+
+        System.out.println("Type a name and surname of Developer from the list or leave the field blank:");
+
+        String chooseRole = "Developer";
+
+        Map<Integer, User> map = new TreeMap<>();
+        int count = 0;
+        for (User user : users) {
+
+            if (chooseRole.equals(user.getRole())) {
+                count++;
+                map.put(count, user);
+            }
+        }
+
+        for (Integer key : map.keySet()) {
+            System.out.println(key + " " + map.get(key).getFullName());
+        }
     }
 
 }
