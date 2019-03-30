@@ -3,7 +3,9 @@ package menu;
 import backlog.BacklogController;
 import backlog.BacklogMenu;
 import scrum.ScrumProject;
+import sprint.SprintController;
 import user.UserController;
+import utils.Styles;
 
 import java.util.Scanner;
 
@@ -12,7 +14,9 @@ public class Menu {
     private UserController userController = new UserController();
     private BacklogController backlogController = new BacklogController();
     private BacklogMenu backlogMenu = new BacklogMenu();
+    private SprintController sprintController = new SprintController();
     private ScrumProject scrumProject = new ScrumProject();
+
 
     //wzorzec 'template'
     private Menu() {
@@ -24,9 +28,9 @@ public class Menu {
 
         System.out.println();
         System.out.println("------------------------------- Scrum Board -------------------------------");
-        System.out.println();
+        System.out.println(Styles.ACTION);
         System.out.println("                                 MAIN MENU                                 ");
-        System.out.println();
+        System.out.println(Styles.RESET);
         System.out.println("---------------------------------------------------------------------------");
         System.out.println("  Choose:");
         System.out.println("  1 - Administrator");
@@ -48,9 +52,9 @@ public class Menu {
                 backlogMenu.selectOption();
                 break;
             case 4:
-                System.out.println();
+                System.out.println(Styles.ACTION);
                 System.out.println("----------------------------------- END -----------------------------------");
-                System.out.println();
+                System.out.println(Styles.RESET);
                 System.exit(0);
             default:
                 System.out.println("Incorrect digit. Please try again.");
@@ -113,8 +117,8 @@ public class Menu {
                 backlogController.importTasks();
                 break;
             case 2:
-                System.out.println("JZ6AM-8 (Create a new Sprint)");
-                break;
+                sprintController.createSprint();
+                return;
             case 3:
                 return;
             case 4:

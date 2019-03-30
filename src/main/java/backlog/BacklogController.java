@@ -4,6 +4,7 @@ import com.google.gson.reflect.TypeToken;
 import org.apache.commons.lang3.StringUtils;
 import userstory.UserStory;
 import utils.FileUtils;
+import utils.Styles;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -17,7 +18,8 @@ public class BacklogController {
     private static final String DIRECTORY = System.getProperty("user.dir");
     private static final String BACKLOG_JSON_FILE = Paths.get(DIRECTORY + "/Backlog.json").toString();
     private static final Path IMPORT_FILE = Paths.get(DIRECTORY + "/user-stories.json");
-    private static final Type collectionType = new TypeToken<List<UserStory>>() {}.getType();
+    private static final Type collectionType = new TypeToken<List<UserStory>>() {
+    }.getType();
 
     private void inRead() {
         try {
@@ -27,16 +29,16 @@ public class BacklogController {
         }
     }
 
-    public List<UserStory> getTasks() {
-        return FileUtils.readListFromJsonFile(BACKLOG_JSON_FILE, collectionType);
-    }
-
-
     private List<UserStory> enrichId(List<UserStory> backlog) {
         return backlog.stream().map(x -> {
             x.setId();
             return x;
         }).collect(Collectors.toList());
+    }
+
+    public UserStory enrichSprintId(UserStory task, Integer sprintId) {
+        task.setSprintId(sprintId);
+        return task;
     }
 
     public List<UserStory> updateCollection(Integer id, UserStory updatedUserStory) {
@@ -49,6 +51,17 @@ public class BacklogController {
                 }).collect(Collectors.toList());
     }
 
+    public void updateCollection(List<Integer> ids, Integer sprintId) {
+        List<UserStory> updatedUserStories = getTasks().stream()
+                .map(x -> {
+                    if (ids.contains(x.getId())) {
+                        return enrichSprintId(x, sprintId);
+                    }
+                    return x;
+                }).collect(Collectors.toList());
+        FileUtils.saveListToJsonFile(enrichId(updatedUserStories), BACKLOG_JSON_FILE);
+    }
+
     public UserStory findById(Integer id) {
         return getTasks().stream()
                 .filter(x -> x.getId().equals(id))
@@ -57,13 +70,14 @@ public class BacklogController {
 
     public void importTasks() {
 
-        System.out.println("Please provide import file with filename user-stories.json in app directory");
+        System.out.println(Styles.INFO + "Please provide import file with filename user-stories.json" +
+                " in app directory" + Styles.RESET);
         System.out.println();
-        System.out.println("Press Enter to continue...");
+        System.out.println(Styles.RESET + "Press Enter to continue...");
         inRead();
 
         if (!Files.exists(IMPORT_FILE)) {
-            System.out.println("File user-stories.json not found!");
+            System.out.println(Styles.ERROR + "File user-stories.json not found!");
             return;
         }
         String path = IMPORT_FILE.toString();
@@ -94,4 +108,15 @@ public class BacklogController {
         }
         System.out.format("+----+---------------------------+---------+------------------------------+%n");
     }
+
+    public List<UserStory> getTasks() {
+        return FileUtils.readListFromJsonFile(BACKLOG_JSON_FILE, collectionType);
+    }
+
+    public List<UserStory> getTasksByIds(List ids) {
+        List<UserStory> backlog = FileUtils.readListFromJsonFile(BACKLOG_JSON_FILE, collectionType);
+        return backlog.stream().filter(task -> ids.contains(task.getId())).collect(Collectors.toList());
+    }
+
+
 }
