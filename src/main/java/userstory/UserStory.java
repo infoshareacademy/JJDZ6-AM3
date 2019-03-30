@@ -14,6 +14,15 @@ public class UserStory {
     private Priority priority;
     private Integer storyPoints;
     private String State;
+    private Integer sprintId;
+
+    public Integer getSprintId() {
+        return sprintId;
+    }
+
+    public void setSprintId(Integer sprintId) {
+        this.sprintId = sprintId;
+    }
 
     public Integer getStoryPoints() {
         return storyPoints;

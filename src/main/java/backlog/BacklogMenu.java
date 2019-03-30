@@ -2,6 +2,7 @@ package backlog;
 
 import menu.Menu;
 import userstory.UserStoryMenu;
+import utils.Styles;
 
 public class BacklogMenu {
 
@@ -11,9 +12,9 @@ public class BacklogMenu {
 
         System.out.println();
         System.out.println("---------------------------------------------------------------------------");
-        System.out.println();
+        System.out.println(Styles.ACTION);
         System.out.println("                                 BACKLOG MENU                              ");
-        System.out.println();
+        System.out.println(Styles.RESET);
         System.out.println("---------------------------------------------------------------------------");
         System.out.println("  Choose:");
         System.out.println("  1 - Update Task");

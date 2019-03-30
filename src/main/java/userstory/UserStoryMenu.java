@@ -17,7 +17,7 @@ public class UserStoryMenu {
     private Scanner scanner = new Scanner(System.in);
 
     public void updateTaskMenu() {
-        System.out.println("Please type id of task you want to update");
+        System.out.println("\u001B[47m" + "\u001B[30m" + "Please type id of task you want to update" + "\u001B[0m");
         Integer id = scanner.nextInt();
         selectOption(id, backlogController.findById(id));
     }
@@ -60,7 +60,7 @@ public class UserStoryMenu {
                 System.out.println();
                 System.exit(0);
             default:
-                System.out.println("Incorrect digit. Please try again.");
+                System.out.println("\u001B[31m" + "Incorrect digit. Please try again.");
         }
         System.out.println();
 
