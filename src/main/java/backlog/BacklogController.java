@@ -36,9 +36,12 @@ public class BacklogController {
         }).collect(Collectors.toList());
     }
 
-    public UserStory enrichSprintId(UserStory task, Integer sprintId) {
-        task.setSprintId(sprintId);
-        return task;
+
+    public void removeTasksFromBacklog(List ids) {
+        List<UserStory> updatedUserStories = getTasks().stream()
+                .filter(x -> !ids.contains(x.getId()))
+                .collect(Collectors.toList());
+        FileUtils.saveListToJsonFile(updatedUserStories, BACKLOG_JSON_FILE);
     }
 
     public List<UserStory> updateCollection(Integer id, UserStory updatedUserStory) {
@@ -49,17 +52,6 @@ public class BacklogController {
                     }
                     return x;
                 }).collect(Collectors.toList());
-    }
-
-    public void updateCollection(List<Integer> ids, Integer sprintId) {
-        List<UserStory> updatedUserStories = getTasks().stream()
-                .map(x -> {
-                    if (ids.contains(x.getId())) {
-                        return enrichSprintId(x, sprintId);
-                    }
-                    return x;
-                }).collect(Collectors.toList());
-        FileUtils.saveListToJsonFile(enrichId(updatedUserStories), BACKLOG_JSON_FILE);
     }
 
     public UserStory findById(Integer id) {

@@ -3,6 +3,7 @@ package user;
 import com.google.gson.reflect.TypeToken;
 import user.model.User;
 import utils.FileUtils;
+import utils.Styles;
 
 import java.lang.reflect.Type;
 import java.nio.file.Paths;
@@ -22,16 +23,22 @@ public class UserController {
 
         List<User> users = FileUtils.readListFromJsonFile(USERS_JSON_FILE, collectionType);
 
-        System.out.println("Please type user full name");
+        System.out.println(Styles.INFO + "Please type user full name" + Styles.RESET);
         String fullName = scanner.nextLine();
-        System.out.println("Please type user email");
+        System.out.println(Styles.INFO + "Please type user email" + Styles.RESET);
         String email = scanner.nextLine();
-        System.out.println("Please type user role");
+        System.out.println(Styles.INFO + "Please type user role" + Styles.RESET);
         String role = scanner.nextLine();
 
         User user = new User(fullName, email, role);
 
         users.add(user);
+
+        System.out.println("ALL USERS: ");
+
+        for (User person : users) {
+            System.out.println(person.toString());
+        }
 
         FileUtils.saveListToJsonFile(users, USERS_JSON_FILE);
 
