@@ -63,7 +63,7 @@ public class SprintController {
 
     public void assignTasks(List<Integer> ids, Sprint sprint) {
         List<UserStory> userStories = backlogController.getTasksByIds(ids);
-        backlogController.updateCollection(ids, sprint.getId());
+        backlogController.removeTasksFromBacklog(ids);
 
         sprint.setTasks(userStories);
     }
