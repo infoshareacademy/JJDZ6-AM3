@@ -3,6 +3,7 @@ package userstory;
 import backlog.BacklogController;
 import menu.Menu;
 import utils.FileUtils;
+import utils.Styles;
 
 import java.nio.file.Paths;
 import java.util.Scanner;
@@ -34,7 +35,7 @@ public class UserStoryMenu {
         System.out.println("  1 - Update title");
         System.out.println("  2 - Update description");
         System.out.println("  3 - Estimate task");
-        System.out.println("  4 - Cancel");
+        System.out.println("  4 - Go back");
         System.out.println("  5 - QUIT APP");
 
         int menu = Menu.enterKey();
@@ -60,7 +61,7 @@ public class UserStoryMenu {
                 System.out.println();
                 System.exit(0);
             default:
-                System.out.println("\u001B[31m" + "Incorrect digit. Please try again.");
+                System.out.println(Styles.ERROR + "Incorrect digit. Please try again.");
         }
         System.out.println();
 
