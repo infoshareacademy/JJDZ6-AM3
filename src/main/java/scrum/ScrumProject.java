@@ -4,6 +4,7 @@ import com.google.gson.reflect.TypeToken;
 import user.UserController;
 import utils.FileUtils;
 import utils.KeyGen;
+import utils.Styles;
 
 import java.lang.reflect.Type;
 import java.nio.file.Paths;
@@ -25,16 +26,16 @@ public class ScrumProject {
         Project project = new Project();
 
         //Project name
-        System.out.println("Please type project full name: ");
+        System.out.println(Styles.INFO + "Please type project full name: " + Styles.RESET);
         project.setFullNameOfProject(scanner.nextLine());
 
         //Key generator
         String key = KeyGen.getKey();
-        System.out.println("Key: ");
+        System.out.println(Styles.INFO + "Key: " + Styles.RESET);
         System.out.println(key);
 
         //Product Owner
-        System.out.println("Please type Product Owner full name: ");
+        System.out.println(Styles.INFO + "Please type Product Owner full name: " + Styles.RESET);
         project.setFullNameOfProductOwner(scanner.nextLine());
 
         //list of developers

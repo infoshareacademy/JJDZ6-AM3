@@ -48,7 +48,7 @@ public class UserController {
 
         List<User> users = FileUtils.readListFromJsonFile(USERS_JSON_FILE, collectionType);
 
-        System.out.println("Type a name and surname of Developer from the list or leave the field blank:");
+        System.out.println(Styles.INFO + "Type a name and surname of Developer from the list or leave the field blank:" + Styles.RESET);
 
         String chooseRole = "Developer";
 
