@@ -1,0 +1,14 @@
+body {
+    background-color: lightblue;
+    font-family: 'Roboto', sans-serif;
+}
+
+.container {
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+header {
+    color: pink;
+    text-align: center;
+}
