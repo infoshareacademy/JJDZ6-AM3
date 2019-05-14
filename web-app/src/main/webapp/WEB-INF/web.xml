@@ -4,4 +4,12 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+  <filter>
+    <filter-name>default</filter-name>
+    <filter-class>filter.DefaultFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>default</filter-name>
+    <url-pattern>/static/*</url-pattern>
+  </filter-mapping>
 </web-app>
