@@ -14,6 +14,7 @@ public class Task {
     private Priority priority;
     private Integer storyPoints;
     private State state;
+    private User assignee;
     private String projectId;
 
     public Task() {
@@ -89,4 +90,26 @@ public class Task {
         this.projectId = projectId;
     }
 
+    public User getAssignee() {
+        return assignee;
+    }
+
+    public void setAssignee(User assignee) {
+        this.assignee = assignee;
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", type=" + type +
+                ", description='" + description + '\'' +
+                ", priority=" + priority +
+                ", storyPoints=" + storyPoints +
+                ", state=" + state +
+                ", assignee=" + assignee +
+                ", projectId='" + projectId + '\'' +
+                '}';
+    }
 }

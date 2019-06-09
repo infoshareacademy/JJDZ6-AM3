@@ -1,7 +1,7 @@
-package servlets.Project;
+package servlets.Sprint;
 
-import api.domain.Project;
-import api.repository.ProjectRepository;
+import api.domain.Sprint;
+import api.service.SprintService;
 import config.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -16,14 +16,11 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by Marek on 11.06.2019.
- */
-@WebServlet("/project-edit")
-public class EditProjectServlet extends HttpServlet {
+@WebServlet("/sprint")
+public class SprintServlet extends HttpServlet {
 
     @Inject
-    ProjectRepository projectRepository;
+    SprintService taskService;
 
     @Inject
     TemplateProvider templateProvider;
@@ -32,12 +29,13 @@ public class EditProjectServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String id = req.getParameter("id");
-        Project project = projectRepository.findById(id);
+
+        Sprint task = taskService.findById(id);
 
         Map<String, Object> model = new HashMap<>();
-        model.put("project", project);
+        model.put("task", task);
 
-        Template template = templateProvider.getTemplate(getServletContext(), "create-project.ftlh");
+        Template template = templateProvider.getTemplate(getServletContext(), "sprint.ftlh");
 
         try {
             template.process(model, resp.getWriter());
@@ -46,3 +44,4 @@ public class EditProjectServlet extends HttpServlet {
         }
     }
 }
+

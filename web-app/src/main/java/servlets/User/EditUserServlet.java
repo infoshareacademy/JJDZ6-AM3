@@ -2,7 +2,7 @@ package servlets.User;
 
 import api.domain.Role;
 import api.domain.User;
-import api.repository.UserRepository;
+import api.service.UserService;
 import config.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -20,12 +20,12 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-@WebServlet("edit-user")
+@WebServlet("user-edit")
 public class EditUserServlet extends HttpServlet {
     @Inject
     TemplateProvider templateProvider;
     @Inject
-    UserRepository userRepository;
+    UserService userService;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -33,7 +33,7 @@ public class EditUserServlet extends HttpServlet {
         String id = req.getParameter("id");
 
         List<Role> roles = Stream.of(Role.values()).collect(Collectors.toList());
-        User user = userRepository.findById(id);
+        User user = userService.findById(id);
 
 
         Map<String, Object> model = new HashMap<>();

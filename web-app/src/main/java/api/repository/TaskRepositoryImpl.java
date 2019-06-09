@@ -59,6 +59,7 @@ public class TaskRepositoryImpl implements TaskRepository {
                         entity.setStoryPoints(task.getStoryPoints());
                         entity.setType(task.getType());
                         entity.setState(task.getState());
+                        entity.setAssignee(task.getAssignee());
                         return entity;
                     }
                     return entity;

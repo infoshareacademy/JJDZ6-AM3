@@ -1,9 +1,13 @@
 package servlets.Task;
 
+import api.domain.Project;
 import api.domain.State;
 import api.domain.Task;
 import api.domain.Type;
-import api.repository.TaskRepository;
+import api.domain.User;
+import api.service.ProjectService;
+import api.service.TaskService;
+import api.service.UserService;
 import config.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -25,7 +29,11 @@ import java.util.stream.Stream;
 public class EditTaskServlet extends HttpServlet {
 
     @Inject
-    TaskRepository taskRepository;
+    TaskService taskService;
+    @Inject
+    ProjectService projectService;
+    @Inject
+    UserService userService;
 
     @Inject
     TemplateProvider templateProvider;
@@ -34,15 +42,19 @@ public class EditTaskServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String id = req.getParameter("id");
-        Task task = taskRepository.findById(id);
+        Task task = taskService.findById(id);
 
         List<Type> types = Stream.of(Type.values()).collect(Collectors.toList());
         List<State> states = Stream.of(State.values()).collect(Collectors.toList());
+        List<Project> projects = projectService.findAll();
+        List<User> users = userService.findAll();
 
         Map<String, Object> model = new HashMap<>();
         model.put("task", task);
         model.put("types", types);
         model.put("states", states);
+        model.put("projects", projects);
+        model.put("users", users);
 
         Template template = templateProvider.getTemplate(getServletContext(), "create-task.ftlh");
 

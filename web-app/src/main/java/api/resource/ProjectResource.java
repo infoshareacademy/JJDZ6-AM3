@@ -1,13 +1,15 @@
 package api.resource;
 
 import api.domain.Project;
-import api.repository.ProjectRepository;
+import api.service.ProjectService;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -18,32 +20,41 @@ import java.util.List;
 public class ProjectResource {
 
     @Inject
-    ProjectRepository projectRepository;
+    ProjectService projectService;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Project> getProjects() {
-        return projectRepository.findAll();
+        return projectService.findAll();
     }
 
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Project getProject(@PathParam("id") String id) {
-        return projectRepository.findById(id);
+        return projectService.findById(id);
     }
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Project createProjects(Project project) {
-        return projectRepository.save(project);
+    public Project createProjects(@Valid Project project) {
+        return projectService.save(project);
+    }
+
+    @PUT
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Project updateProject(@PathParam("id") String id, @Valid Project project) {
+        project.setId(id);
+        return projectService.update(project);
     }
 
     @DELETE
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public void deleteProject(@PathParam("id") String id) {
-        projectRepository.delete(id);
+        projectService.delete(id);
     }
 }

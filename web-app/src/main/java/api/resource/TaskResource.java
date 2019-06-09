@@ -1,7 +1,7 @@
 package api.resource;
 
 import api.domain.Task;
-import api.repository.TaskRepository;
+import api.service.TaskService;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -21,19 +21,19 @@ import java.util.UUID;
 public class TaskResource {
 
     @Inject
-    TaskRepository taskRepositoryImpl;
+    TaskService taskService;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Task> getTasks() {
-        return taskRepositoryImpl.findAll();
+        return taskService.findAll();
     }
 
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Task getTask(@PathParam("id") String id) {
-        return taskRepositoryImpl.findById(id);
+        return taskService.findById(id);
     }
 
     @POST
@@ -41,7 +41,7 @@ public class TaskResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public Task createTasks(@Valid Task task) {
         task.setId(UUID.randomUUID().toString());
-        return taskRepositoryImpl.save(task);
+        return taskService.saveTask(task);
     }
 
     @PUT
@@ -50,13 +50,13 @@ public class TaskResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public Task updateTasks(@PathParam("id") String id, @Valid Task task) {
         task.setId(id);
-        return taskRepositoryImpl.update(task);
+        return taskService.update(task);
     }
 
     @DELETE
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public void deleteTask(@PathParam("id") String id) {
-        taskRepositoryImpl.delete(id);
+        taskService.delete(id);
     }
 }

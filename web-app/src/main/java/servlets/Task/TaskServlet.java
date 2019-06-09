@@ -1,7 +1,7 @@
 package servlets.Task;
 
 import api.domain.Task;
-import api.repository.TaskRepository;
+import api.service.TaskService;
 import config.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -20,7 +20,7 @@ import java.util.Map;
 public class TaskServlet extends HttpServlet {
 
     @Inject
-    TaskRepository taskRepository;
+    TaskService taskService;
 
     @Inject
     TemplateProvider templateProvider;
@@ -30,8 +30,7 @@ public class TaskServlet extends HttpServlet {
 
         String id = req.getParameter("id");
 
-        Task task = taskRepository.findById(id);
-
+        Task task = taskService.findById(id);
 
         Map<String, Object> model = new HashMap<>();
         model.put("task", task);

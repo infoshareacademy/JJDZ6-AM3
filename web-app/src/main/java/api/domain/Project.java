@@ -2,6 +2,7 @@ package api.domain;
 
 import javax.persistence.Entity;
 import javax.validation.constraints.NotBlank;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -10,6 +11,15 @@ public class Project {
     private String id = UUID.randomUUID().toString();
     @NotBlank(message = "Project name can not be empty")
     private String name;
+    private Set<Task> tasks;
+
+    public Set<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(Set<Task> tasks) {
+        this.tasks = tasks;
+    }
 
     public Project() {
     }
