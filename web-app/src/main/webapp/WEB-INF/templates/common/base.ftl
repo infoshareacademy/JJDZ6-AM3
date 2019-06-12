@@ -25,7 +25,7 @@
             <div class="aui-header-inner">
               <div class="aui-header-primary">
                 <h1 id="logo" class="aui-header-logo aui-header-logo-textonly"><a href="https://example.com/"><span
-                      class="aui-header-logo-device">SCUM BOARD</span></a></h1>
+                      class="aui-header-logo-device">SCRUM BOARD</span></a></h1>
                 <ul class="aui-nav">
                   <li><a href="/projects">Projects</a></li>
                   <li><a href="/tasks">Backlog</a></li>
