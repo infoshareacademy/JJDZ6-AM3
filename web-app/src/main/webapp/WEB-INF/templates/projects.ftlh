@@ -7,11 +7,7 @@
     <thead>
         <tr>
             <th id="id">id</th>
-            <th id="name">Type</th>
-            <th id="title">Title</th>
-            <th id="description">Description</th>
-            <th id="name">State</th>
-            <th id="story-points">Story Points</th>
+            <th id="name">Name</th>
             <th id="actions">Actions</th>
         </tr>
     </thead>
@@ -19,11 +15,7 @@
     <#list projects as project>
     <tr>
             <td class="id"><a href="/project?id=${project.id}">${project.id?keep_before("-")}</a></td>
-            <td class="name"><span class="tag ${project.type?lower_case}">${project.type.getName()}</span></td>
-            <td class="title">${project.title}</td>
-            <td class="description"><#if project.description??>${project.description}</#if></td>
-            <td class="title">${project.state.getName()}</td>
-            <td class="story-points"><#if project.storyPoints??><span>${project.storyPoints}</span></#if></td>
+            <td class="name"><span>${project.name}</span></td>
             <td class="actions">
                 <a class="delete" data-id="${project.id}" href="#">DELETE</a>
                 <a class="edit" data-id="${project.id}" href="#">EDIT</a>

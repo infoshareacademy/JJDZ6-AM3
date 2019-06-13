@@ -2,13 +2,7 @@
 <#macro title>
        <div class="project-header-main">
         <div class="project-header-image">
-            <span class="tag ${project.type?lower_case}">${project.type.getName()}</span>
-        </div>
-        <div class="project-header-content">
-            <h1 class="project-title">
-                ${project.title}
-            </h1>
-            <small class="project-id">Id: ${project.id}</small>
+            <span class="tag ${project.name?lower_case}">${project.name}</span>
         </div>
     </div>
 </#macro>

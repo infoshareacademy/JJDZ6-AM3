@@ -10,17 +10,13 @@ public class Project {
     private String id = UUID.randomUUID().toString();
     @NotBlank(message = "Project name can not be empty")
     private String name;
-    private String productOwnerFullName;
-    private String developerFullName;
 
-    public Project(){
+    public Project() {
     }
 
-    public Project(String id, String name, String productOwnerFullName, String developerFullName) {
+    public Project(String id, String name) {
         this.id = id;
         this.name = name;
-        this.productOwnerFullName = productOwnerFullName;
-        this.developerFullName = developerFullName;
     }
 
     public String getId() {
@@ -39,19 +35,4 @@ public class Project {
         this.name = name;
     }
 
-    public String getProductOwnerFullName() {
-        return productOwnerFullName;
-    }
-
-    public void setProductOwnerFullName(String productOwnerFullName) {
-        this.productOwnerFullName = productOwnerFullName;
-    }
-
-    public String getDeveloperFullName() {
-        return developerFullName;
-    }
-
-    public void setDeveloperFullName(String developerFullName) {
-        this.developerFullName = developerFullName;
-    }
 }

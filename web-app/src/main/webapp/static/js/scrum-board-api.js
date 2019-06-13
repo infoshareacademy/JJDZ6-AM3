@@ -70,3 +70,7 @@ const createUser = async (params) => client.post('/users', { ...params }).catch(
 const deleteUser = async (id) => client.delete(`/users/${id}`).catch(handleError);
 const updateUser = async (id, params) => client.put(`/users/${id}`, { ...params }).catch(handleError);
 
+const createProject = async (params) => client.post('/projects', { ...params }).catch(handleError);
+const deleteProject = async (id) => client.delete(`/projects/${id}`).catch(handleError);
+const updateProject = async (id, params) => client.put(`/projects/${id}`, { ...params }).catch(handleError);
+
