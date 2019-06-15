@@ -1,7 +1,7 @@
 package servlets.Task;
 
 import api.domain.Task;
-import api.repository.TaskRepository;
+import api.service.TaskService;
 import config.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -21,7 +21,7 @@ import java.util.Map;
 public class TaskListServlet extends HttpServlet {
 
     @Inject
-    TaskRepository taskRepository;
+    TaskService taskSevice;
 
     @Inject
     TemplateProvider templateProvider;
@@ -30,7 +30,7 @@ public class TaskListServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 
-        List<Task> tasks = taskRepository.findAll();
+        List<Task> tasks = taskSevice.findAll();
 
 
         Map<String, Object> model = new HashMap<>();

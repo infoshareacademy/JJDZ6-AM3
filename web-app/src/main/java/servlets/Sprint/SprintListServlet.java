@@ -1,7 +1,7 @@
-package servlets.Task;
+package servlets.Sprint;
 
-import api.domain.Task;
-import api.service.TaskService;
+import api.domain.Sprint;
+import api.service.SprintService;
 import config.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -14,13 +14,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-@WebServlet("/task")
-public class TaskServlet extends HttpServlet {
+@WebServlet("/sprints")
+public class SprintListServlet extends HttpServlet {
 
     @Inject
-    TaskService taskService;
+    SprintService sprintService;
 
     @Inject
     TemplateProvider templateProvider;
@@ -28,14 +29,14 @@ public class TaskServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String id = req.getParameter("id");
 
-        Task task = taskService.findById(id);
+        List<Sprint> sprints = sprintService.findAll();
+
 
         Map<String, Object> model = new HashMap<>();
-        model.put("task", task);
+        model.put("sprints", sprints);
 
-        Template template = templateProvider.getTemplate(getServletContext(), "task.ftlh");
+        Template template = templateProvider.getTemplate(getServletContext(), "sprints.ftlh");
 
         try {
             template.process(model, resp.getWriter());

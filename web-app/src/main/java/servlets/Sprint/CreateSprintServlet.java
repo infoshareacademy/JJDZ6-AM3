@@ -1,7 +1,9 @@
-package servlets.Task;
+package servlets.Sprint;
 
-import api.domain.Task;
-import api.service.TaskService;
+import api.domain.Sprint;
+import api.domain.User;
+import api.service.SprintService;
+import api.service.UserService;
 import config.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -14,28 +16,32 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-@WebServlet("/task")
-public class TaskServlet extends HttpServlet {
-
-    @Inject
-    TaskService taskService;
+@WebServlet("/create-sprint")
+public class CreateSprintServlet extends HttpServlet {
 
     @Inject
     TemplateProvider templateProvider;
+    @Inject
+    SprintService sprintService;
+    @Inject
+    UserService userService;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String id = req.getParameter("id");
+        List<Sprint> projects = sprintService.findAll();
+        List<User> users = userService.findAll();
 
-        Task task = taskService.findById(id);
 
         Map<String, Object> model = new HashMap<>();
-        model.put("task", task);
 
-        Template template = templateProvider.getTemplate(getServletContext(), "task.ftlh");
+        model.put("projects", projects);
+        model.put("users", users);
+
+        Template template = templateProvider.getTemplate(getServletContext(), "create-sprint.ftlh");
 
         try {
             template.process(model, resp.getWriter());
@@ -44,4 +50,3 @@ public class TaskServlet extends HttpServlet {
         }
     }
 }
-

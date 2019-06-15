@@ -1,7 +1,7 @@
 package servlets.User;
 
 import api.domain.Role;
-import api.repository.UserRepository;
+import api.service.UserService;
 import config.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -25,7 +25,7 @@ public class AddUserServlet extends HttpServlet {
     @Inject
     TemplateProvider templateProvider;
     @Inject
-    UserRepository userRepository;
+    UserService userService;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

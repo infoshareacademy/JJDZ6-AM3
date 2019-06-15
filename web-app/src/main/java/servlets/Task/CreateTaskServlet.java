@@ -3,7 +3,9 @@ package servlets.Task;
 import api.domain.Project;
 import api.domain.State;
 import api.domain.Type;
-import api.repository.ProjectRepository;
+import api.domain.User;
+import api.service.ProjectService;
+import api.service.UserService;
 import config.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -27,14 +29,17 @@ public class CreateTaskServlet extends HttpServlet {
     @Inject
     TemplateProvider templateProvider;
     @Inject
-    ProjectRepository projectRepository;
+    ProjectService projectService;
+    @Inject
+    UserService userService;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         List<Type> types = Stream.of(Type.values()).collect(Collectors.toList());
         List<State> states = Stream.of(State.values()).collect(Collectors.toList());
-        List<Project> projects = projectRepository.findAll();
+        List<Project> projects = projectService.findAll();
+        List<User> users = userService.findAll();
 
 
         Map<String, Object> model = new HashMap<>();
@@ -42,6 +47,7 @@ public class CreateTaskServlet extends HttpServlet {
         model.put("types", types);
         model.put("states", states);
         model.put("projects", projects);
+        model.put("users", users);
 
         Template template = templateProvider.getTemplate(getServletContext(), "create-task.ftlh");
 

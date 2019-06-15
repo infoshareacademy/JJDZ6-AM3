@@ -1,7 +1,7 @@
-package servlets.Task;
+package servlets.User;
 
-import api.domain.Task;
-import api.service.TaskService;
+import api.domain.User;
+import api.service.UserService;
 import config.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -14,13 +14,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-@WebServlet("/task")
-public class TaskServlet extends HttpServlet {
-
+@WebServlet("/users")
+public class UserListServlet extends HttpServlet {
     @Inject
-    TaskService taskService;
+    UserService userService;
 
     @Inject
     TemplateProvider templateProvider;
@@ -28,14 +28,14 @@ public class TaskServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String id = req.getParameter("id");
 
-        Task task = taskService.findById(id);
+        List<User> users = userService.findAll();
+
 
         Map<String, Object> model = new HashMap<>();
-        model.put("task", task);
+        model.put("users", users);
 
-        Template template = templateProvider.getTemplate(getServletContext(), "task.ftlh");
+        Template template = templateProvider.getTemplate(getServletContext(), "users.ftlh");
 
         try {
             template.process(model, resp.getWriter());
@@ -44,4 +44,3 @@ public class TaskServlet extends HttpServlet {
         }
     }
 }
-

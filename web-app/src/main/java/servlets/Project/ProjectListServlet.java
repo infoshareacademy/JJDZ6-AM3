@@ -1,7 +1,9 @@
-package servlets.Task;
+package servlets.Project;
 
+import api.domain.Project;
 import api.domain.Task;
-import api.service.TaskService;
+import api.repository.ProjectRepository;
+import api.repository.TaskRepository;
 import config.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -14,13 +16,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-@WebServlet("/task")
-public class TaskServlet extends HttpServlet {
+/**
+ * Created by Marek on 11.06.2019.
+ */
+@WebServlet("/projects")
+public class ProjectListServlet extends HttpServlet {
 
     @Inject
-    TaskService taskService;
+    ProjectRepository projectRepository;
 
     @Inject
     TemplateProvider templateProvider;
@@ -28,14 +34,13 @@ public class TaskServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String id = req.getParameter("id");
+        List<Project> projects = projectRepository.findAll();
 
-        Task task = taskService.findById(id);
 
         Map<String, Object> model = new HashMap<>();
-        model.put("task", task);
+        model.put("projects", projects);
 
-        Template template = templateProvider.getTemplate(getServletContext(), "task.ftlh");
+        Template template = templateProvider.getTemplate(getServletContext(), "projects.ftlh");
 
         try {
             template.process(model, resp.getWriter());
@@ -43,5 +48,5 @@ public class TaskServlet extends HttpServlet {
             e.printStackTrace();
         }
     }
-}
 
+}

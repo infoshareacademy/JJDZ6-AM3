@@ -1,7 +1,9 @@
-package servlets.Task;
+package servlets.Project;
 
+import api.domain.Project;
 import api.domain.Task;
-import api.service.TaskService;
+import api.repository.ProjectRepository;
+import api.repository.TaskRepository;
 import config.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -16,11 +18,14 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet("/task")
-public class TaskServlet extends HttpServlet {
+/**
+ * Created by Marek on 11.06.2019.
+ */
+@WebServlet("/project")
+public class ProjectServlet extends HttpServlet {
 
     @Inject
-    TaskService taskService;
+    ProjectRepository projectRepository;
 
     @Inject
     TemplateProvider templateProvider;
@@ -30,12 +35,12 @@ public class TaskServlet extends HttpServlet {
 
         String id = req.getParameter("id");
 
-        Task task = taskService.findById(id);
+        Project project = projectRepository.findById(id);
 
         Map<String, Object> model = new HashMap<>();
-        model.put("task", task);
+        model.put("project", project);
 
-        Template template = templateProvider.getTemplate(getServletContext(), "task.ftlh");
+        Template template = templateProvider.getTemplate(getServletContext(), "project.ftlh");
 
         try {
             template.process(model, resp.getWriter());
@@ -44,4 +49,3 @@ public class TaskServlet extends HttpServlet {
         }
     }
 }
-

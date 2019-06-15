@@ -1,7 +1,7 @@
-package servlets.Task;
+package servlets.Sprint;
 
-import api.domain.Task;
-import api.service.TaskService;
+import api.domain.Sprint;
+import api.service.SprintService;
 import config.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -16,11 +16,11 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet("/task")
-public class TaskServlet extends HttpServlet {
+@WebServlet("/sprint")
+public class SprintServlet extends HttpServlet {
 
     @Inject
-    TaskService taskService;
+    SprintService taskService;
 
     @Inject
     TemplateProvider templateProvider;
@@ -30,12 +30,12 @@ public class TaskServlet extends HttpServlet {
 
         String id = req.getParameter("id");
 
-        Task task = taskService.findById(id);
+        Sprint task = taskService.findById(id);
 
         Map<String, Object> model = new HashMap<>();
         model.put("task", task);
 
-        Template template = templateProvider.getTemplate(getServletContext(), "task.ftlh");
+        Template template = templateProvider.getTemplate(getServletContext(), "sprint.ftlh");
 
         try {
             template.process(model, resp.getWriter());

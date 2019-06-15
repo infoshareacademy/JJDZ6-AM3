@@ -17,6 +17,7 @@
     <div class="task-view-content">
         <div class="task-view-main-column">
             <h4 class="description">Description</h4>
+            <p>${task.description}</p>
         </div>
         <div class="task-view-side-column">
             <h4 class="title">Acceptance Criteria</h4>

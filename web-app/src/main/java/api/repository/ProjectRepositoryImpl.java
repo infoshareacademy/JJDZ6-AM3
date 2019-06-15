@@ -9,6 +9,7 @@ import java.lang.reflect.Type;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class ProjectRepositoryImpl implements ProjectRepository {
@@ -49,8 +50,18 @@ public class ProjectRepositoryImpl implements ProjectRepository {
     }
 
     @Override
-    public Project update(Project entity) {
-        return null;
+    public Project update(Project project) {
+        this.projects = findAll().stream()
+                .map(entity -> {
+                    if (entity.getId().equals(project.getId())) {
+                        entity.setName(project.getName());
+                        return entity;
+                    }
+                    return entity;
+                })
+                .collect(Collectors.toList());
+        persist();
+        return project;
     }
 
     private void persist() {

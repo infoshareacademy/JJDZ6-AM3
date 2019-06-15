@@ -1,15 +1,17 @@
 package api.domain;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 public class User {
 
     private String id;
 
-    @NotNull
+    @NotBlank(message = "Please provide a user name")
     private String fullName;
     @Email(message = "This is not a valid email")
+    @NotBlank(message = "Please provide a user email")
     private String email;
     @NotNull
     private Role role;
@@ -53,5 +55,15 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", email='" + email + '\'' +
+                ", role=" + role +
+                '}';
     }
 }

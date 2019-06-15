@@ -3,6 +3,7 @@
    <h2>Backlog</h2>
 </#macro>
 <#macro page_content>
+<a href="/create-sprint">+ Create New Sprint</a>
 <table class="aui">
     <thead>
         <tr>
@@ -12,6 +13,7 @@
             <th id="description">Description</th>
             <th id="name">State</th>
             <th id="story-points">Story Points</th>
+            <th id="assignee">Assignee</th>
             <th id="actions">Actions</th>
         </tr>
     </thead>
@@ -24,6 +26,7 @@
             <td class="description"><#if task.description??>${task.description}</#if></td>
             <td class="title">${task.state.getName()}</td>
             <td class="story-points"><#if task.storyPoints??><span>${task.storyPoints}</span></#if></td>
+            <td class="assigne"><#if task.assignee??><span>${task.assignee.fullName}</span></#if></td>
             <td class="actions">
                 <a class="delete" data-id="${task.id}" href="#">DELETE</a>
                 <a class="edit" data-id="${task.id}" href="#">EDIT</a>
@@ -51,6 +54,5 @@
         };
         deleteButtons.forEach(button => button.addEventListener('click', handleDelete));
         editButtons.forEach(button => button.addEventListener('click', handleEdit));
-
 </script>
 
