@@ -40,10 +40,10 @@
 <script>
         const deleteButtons = document.querySelectorAll('.delete');
         const editButtons = document.querySelectorAll('.edit');
-        const handleDelete = (e) => {
+        const handleDelete = async (e) => {
             e.preventDefault();
             const id = e.target.dataset.id;
-            deleteTask(id);
+            await deleteTask(id);
             location.reload()
         };
         const handleEdit = (e) => {

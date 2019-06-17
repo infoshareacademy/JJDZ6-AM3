@@ -5,5 +5,5 @@ import api.domain.Sprint;
 import javax.ejb.Local;
 
 @Local
-public interface SprintRepository extends GenericRepository<Sprint, String> {
+public interface SprintRepository extends GenericRepository<Sprint, Long> {
 }

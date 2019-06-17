@@ -15,7 +15,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
-import java.util.UUID;
 
 @Path("/tasks")
 public class TaskResource {
@@ -32,7 +31,7 @@ public class TaskResource {
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Task getTask(@PathParam("id") String id) {
+    public Task getTask(@PathParam("id") Long id) {
         return taskService.findById(id);
     }
 
@@ -40,7 +39,6 @@ public class TaskResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Task createTasks(@Valid Task task) {
-        task.setId(UUID.randomUUID().toString());
         return taskService.saveTask(task);
     }
 
@@ -48,7 +46,7 @@ public class TaskResource {
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Task updateTasks(@PathParam("id") String id, @Valid Task task) {
+    public Task updateTasks(@PathParam("id") Long id, @Valid Task task) {
         task.setId(id);
         return taskService.update(task);
     }
@@ -56,7 +54,7 @@ public class TaskResource {
     @DELETE
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public void deleteTask(@PathParam("id") String id) {
+    public void deleteTask(@PathParam("id") Long id) {
         taskService.delete(id);
     }
 }

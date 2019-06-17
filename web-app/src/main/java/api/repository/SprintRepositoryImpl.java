@@ -1,60 +1,46 @@
 package api.repository;
 
 import api.domain.Sprint;
-import com.google.gson.reflect.TypeToken;
-import utils.FileUtils;
 
-import javax.enterprise.context.ApplicationScoped;
-import java.lang.reflect.Type;
-import java.nio.file.Paths;
-import java.util.ArrayList;
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 
-@ApplicationScoped
+@Stateless
 public class SprintRepositoryImpl implements SprintRepository {
-    private static final String DIRECTORY = System.getProperty("user.dir");
-    private static final String SPRINTS_JSON_FILE = Paths.get(DIRECTORY + "/Sprint.json").toString();
-    private static final Type collectionType = new TypeToken<List<Sprint>>() {}.getType();
-    private List<Sprint> sprints = new ArrayList<>();
 
-    public SprintRepositoryImpl() {
-        this.sprints.addAll(FileUtils.readListFromJsonFile(SPRINTS_JSON_FILE, collectionType));
-    }
+    @PersistenceContext
+    EntityManager entityManager;
 
     @Override
     public Sprint save(Sprint sprint) {
-        this.sprints.add(sprint);
-        persist();
+        entityManager.persist(sprint);
         return sprint;
     }
 
     @Override
-    public Sprint findById(String id) {
-        return findAll()
-                .stream()
-                .filter(x -> x.getId().equals(id))
-                .findAny()
-                .orElse(null);
+    public Sprint findById(Long id) {
+        return entityManager.find(Sprint.class, id);
     }
 
     @Override
     public List<Sprint> findAll() {
-        return this.sprints;
+        return entityManager.createQuery("SELECT p FROM Sprint p", Sprint.class).getResultList();
     }
 
     @Override
-    public void delete(String id) {
-        this.sprints.removeIf(sprint -> sprint.getId().equals(id));
-        persist();
+    public void delete(Long id) {
+        final Sprint sprint = entityManager.find(Sprint.class, id);
+        if (sprint != null) {
+            entityManager.remove(sprint);
+        }
     }
 
     @Override
-    public Sprint update(Sprint entity) {
-        return null;
+    public Sprint update(Sprint sprint) {
+        return entityManager.merge(sprint);
     }
 
-    private void persist() {
-        FileUtils.saveListToJsonFile(this.sprints, SPRINTS_JSON_FILE);
-    }
 }

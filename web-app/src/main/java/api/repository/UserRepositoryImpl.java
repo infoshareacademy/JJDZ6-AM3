@@ -1,72 +1,45 @@
 package api.repository;
 
 import api.domain.User;
-import com.google.gson.reflect.TypeToken;
-import utils.FileUtils;
 
-import javax.enterprise.context.ApplicationScoped;
-import java.lang.reflect.Type;
-import java.nio.file.Paths;
-import java.util.ArrayList;
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
-import java.util.stream.Collectors;
 
-@ApplicationScoped
+@Stateless
 public class UserRepositoryImpl implements UserRepository {
-    private static final String DIRECTORY = System.getProperty("user.dir");
-    private static final String USERS_JSON_FILE = Paths.get(DIRECTORY + "/Users.json").toString();
-    private static final Type collectionType = new TypeToken<List<User>>() {}.getType();
-    private List<User> users = new ArrayList<>();
 
-    public UserRepositoryImpl() {
-        this.users.addAll(FileUtils.readListFromJsonFile(USERS_JSON_FILE, collectionType));
-    }
+    @PersistenceContext
+    EntityManager entityManager;
 
     @Override
     public User save(User user) {
-        this.users.add(user);
-        persist();
+        entityManager.persist(user);
         return user;
     }
 
     @Override
-    public User findById(String id) {
-        return findAll()
-                .stream()
-                .filter(x -> x.getId().equals(id))
-                .findAny()
-                .orElse(null);
+    public User findById(Long id) {
+        return entityManager.find(User.class, id);
     }
 
     @Override
     public List<User> findAll() {
-        return this.users;
+        return entityManager.createQuery("SELECT u FROM User u", User.class).getResultList();
     }
 
     @Override
-    public void delete(String id) {
-        this.users.removeIf(user -> user.getId().equals(id));
-        persist();
+    public void delete(Long id) {
+        final User user = entityManager.find(User.class, id);
+        if (user != null) {
+            entityManager.remove(user);
+        }
     }
 
     @Override
     public User update(User user) {
-        this.users = findAll().stream()
-                .map(entity -> {
-                    if (entity.getId().equals(user.getId())) {
-                        entity.setFullName(user.getFullName());
-                        entity.setEmail(user.getEmail());
-                        entity.setRole(user.getRole());
-                        return entity;
-                    }
-                    return entity;
-                })
-                .collect(Collectors.toList());
-        persist();
-        return user;
+        return entityManager.merge(user);
     }
 
-    private void persist() {
-        FileUtils.saveListToJsonFile(this.users, USERS_JSON_FILE);
-    }
 }

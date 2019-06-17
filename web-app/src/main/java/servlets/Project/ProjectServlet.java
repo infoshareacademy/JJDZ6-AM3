@@ -1,9 +1,7 @@
 package servlets.Project;
 
 import api.domain.Project;
-import api.domain.Task;
 import api.repository.ProjectRepository;
-import api.repository.TaskRepository;
 import config.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -33,7 +31,7 @@ public class ProjectServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String id = req.getParameter("id");
+        Long id = Long.valueOf(req.getParameter("id"));
 
         Project project = projectRepository.findById(id);
 

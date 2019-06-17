@@ -1,12 +1,19 @@
 package api.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 
 @Entity
 public class Task {
 
-    private String id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long id;
     @NotBlank(message = "Title must not be empty")
     private String title;
     private Type type;
@@ -14,6 +21,8 @@ public class Task {
     private Priority priority;
     private Integer storyPoints;
     private State state;
+    @OneToOne
+    @JoinColumn(name = "assignee_id", referencedColumnName = "id")
     private User assignee;
     private String projectId;
 
@@ -26,11 +35,11 @@ public class Task {
         this.state = state;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

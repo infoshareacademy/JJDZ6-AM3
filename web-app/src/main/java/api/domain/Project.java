@@ -1,17 +1,28 @@
 package api.domain;
 
 import javax.persistence.Entity;
-import javax.validation.constraints.NotBlank;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.util.Set;
-import java.util.UUID;
 
 @Entity
 public class Project {
 
-    private String id = UUID.randomUUID().toString();
-    @NotBlank(message = "Project name can not be empty")
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long id;
     private String name;
+    @OneToMany
     private Set<Task> tasks;
+
+    public Project() {
+    }
+
+    public Project(String name) {
+        this.name = name;
+    }
 
     public Set<Task> getTasks() {
         return tasks;
@@ -19,22 +30,6 @@ public class Project {
 
     public void setTasks(Set<Task> tasks) {
         this.tasks = tasks;
-    }
-
-    public Project() {
-    }
-
-    public Project(String id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -45,4 +40,11 @@ public class Project {
         this.name = name;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

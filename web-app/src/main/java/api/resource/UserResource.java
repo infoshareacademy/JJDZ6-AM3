@@ -1,7 +1,7 @@
 package api.resource;
 
 import api.domain.User;
-import api.repository.UserRepository;
+import api.service.UserService;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -15,48 +15,46 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
-import java.util.UUID;
 
 @Path("/users")
 public class UserResource {
 
     @Inject
-    UserRepository userRepository;
+    UserService userService;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<User> getUsers() {
-        return userRepository.findAll();
+        return userService.findAll();
     }
 
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public User getUser(@PathParam("id") String id) {
-        return userRepository.findById(id);
+    public User getUser(@PathParam("id") Long id) {
+        return userService.findById(id);
     }
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public User createUsers(@Valid User user) {
-        user.setId(UUID.randomUUID().toString());
-        return userRepository.save(user);
+        return userService.save(user);
     }
 
     @PUT
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public User updateUsers(@PathParam("id") String id, @Valid User user) {
+    public User updateUsers(@PathParam("id") Long id, @Valid User user) {
         user.setId(id);
-        return userRepository.update(user);
+        return userService.update(user);
     }
 
     @DELETE
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public void deleteUser(@PathParam("id") String id) {
-        userRepository.delete(id);
+    public void deleteUser(@PathParam("id") Long id) {
+        userService.delete(id);
     }
 }

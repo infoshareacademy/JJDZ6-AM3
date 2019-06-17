@@ -31,7 +31,7 @@ public class ProjectResource {
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Project getProject(@PathParam("id") String id) {
+    public Project getProject(@PathParam("id") Long id) {
         return projectService.findById(id);
     }
 
@@ -47,14 +47,13 @@ public class ProjectResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Project updateProject(@PathParam("id") String id, @Valid Project project) {
-        project.setId(id);
         return projectService.update(project);
     }
 
     @DELETE
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public void deleteProject(@PathParam("id") String id) {
+    public void deleteProject(@PathParam("id") Long id) {
         projectService.delete(id);
     }
 }

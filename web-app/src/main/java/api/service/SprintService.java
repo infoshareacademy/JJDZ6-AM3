@@ -3,11 +3,11 @@ package api.service;
 import api.domain.Sprint;
 import api.repository.SprintRepository;
 
-import javax.enterprise.context.ApplicationScoped;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.util.List;
 
-@ApplicationScoped
+@Stateless
 public class SprintService {
 
     @Inject
@@ -17,7 +17,7 @@ public class SprintService {
         return sprintRepository.save(sprint);
     }
 
-    public Sprint findById(String id) {
+    public Sprint findById(Long id) {
         return sprintRepository.findById(id);
     }
 
@@ -25,7 +25,7 @@ public class SprintService {
         return this.sprintRepository.findAll();
     }
 
-    public void delete(String id) {
+    public void delete(Long id) {
         sprintRepository.delete(id);
     }
 

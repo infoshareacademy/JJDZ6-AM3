@@ -1,27 +1,33 @@
 package api.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.util.Date;
 import java.util.Set;
-import java.util.UUID;
 
 @Entity
 public class Sprint {
 
-    private String id = UUID.randomUUID().toString();
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long id;
     private String name;
     private Date startDate;
     private Date endDate;
+    @OneToMany
     private Set<Task> tasks;
 
     public Sprint() {
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -1,13 +1,19 @@
 package api.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+
+@Entity
 public class User {
-
-    private String id;
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long id;
     @NotBlank(message = "Please provide a user name")
     private String fullName;
     @Email(message = "This is not a valid email")
@@ -25,11 +31,11 @@ public class User {
         this.role = role;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

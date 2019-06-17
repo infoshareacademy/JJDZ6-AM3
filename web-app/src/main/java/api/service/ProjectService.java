@@ -3,11 +3,11 @@ package api.service;
 import api.domain.Project;
 import api.repository.ProjectRepository;
 
-import javax.enterprise.context.ApplicationScoped;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.util.List;
 
-@ApplicationScoped
+@Stateless
 public class ProjectService {
 
     @Inject
@@ -17,7 +17,7 @@ public class ProjectService {
         return projectRepository.save(project);
     }
 
-    public Project findById(String id) {
+    public Project findById(Long id) {
         return projectRepository.findById(id);
     }
 
@@ -25,7 +25,7 @@ public class ProjectService {
         return this.projectRepository.findAll();
     }
 
-    public void delete(String id) {
+    public void delete(Long id) {
         projectRepository.delete(id);
     }
 

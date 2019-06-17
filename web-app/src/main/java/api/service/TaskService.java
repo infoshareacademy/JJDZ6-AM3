@@ -5,11 +5,11 @@ import api.domain.User;
 import api.repository.TaskRepository;
 import api.repository.UserRepository;
 
-import javax.enterprise.context.ApplicationScoped;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.util.List;
 
-@ApplicationScoped
+@Stateless
 public class TaskService {
 
     @Inject
@@ -21,7 +21,7 @@ public class TaskService {
         return taskRepository.save(setAssignee(task));
     }
 
-    public Task findById(String id) {
+    public Task findById(Long id) {
         return taskRepository.findById(id);
     }
 
@@ -29,7 +29,7 @@ public class TaskService {
         return this.taskRepository.findAll();
     }
 
-    public void delete(String id) {
+    public void delete(Long id) {
         taskRepository.delete(id);
     }
 

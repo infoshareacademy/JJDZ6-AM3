@@ -3,11 +3,11 @@ package api.service;
 import api.domain.User;
 import api.repository.UserRepository;
 
-import javax.enterprise.context.ApplicationScoped;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.util.List;
 
-@ApplicationScoped
+@Stateless
 public class UserService {
 
     @Inject
@@ -17,7 +17,7 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User findById(String id) {
+    public User findById(Long id) {
         return userRepository.findById(id);
     }
 
@@ -25,7 +25,7 @@ public class UserService {
         return this.userRepository.findAll();
     }
 
-    public void delete(String id) {
+    public void delete(Long id) {
         userRepository.delete(id);
     }
 
