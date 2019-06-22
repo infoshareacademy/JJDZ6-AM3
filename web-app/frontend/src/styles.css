@@ -1,0 +1,34 @@
+html,
+body,
+#app {
+    height: 100%;
+    box-sizing: border-box;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+td {
+    margin: 0;
+    padding: 8px;
+    text-align: left;
+}
+
+thead > tr {
+    border-bottom: 2px solid rgb(223, 225, 230);
+}
+
+tbody > tr:hover {
+    background-color: rgb(250, 251, 252);;
+}
+
+tbody > tr:last-child {
+    border-bottom: 2px solid rgb(223, 225, 230);
+}
+
+table a {
+    color: #0052CC;
+    text-decoration: none;
+}

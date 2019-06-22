@@ -11,7 +11,7 @@ import java.io.IOException;
 @RequestScoped
 public class TemplateProvider {
 
-    private final String TEMPLATES_DIRECTORY_PATH = "WEB-INF/templates";
+    private final String TEMPLATES_DIRECTORY_PATH = "/";
     private Configuration configuration;
 
     @Inject

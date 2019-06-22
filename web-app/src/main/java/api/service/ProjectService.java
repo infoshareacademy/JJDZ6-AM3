@@ -69,4 +69,8 @@ public class ProjectService {
     public List<Task> getBacklog(Long id) {
         return taskRepository.getAllTasksForBacklog(id);
     }
+
+    public List<User> getAllUsersForProject(Long id) {
+        return userRepository.findAllUsersForProject(id);
+    }
 }

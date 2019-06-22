@@ -46,6 +46,13 @@ public class ProjectResource {
     }
 
     @GET
+    @Path("/{id}/users")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<User> getAllUsersForProject(@PathParam("id") Long id) {
+        return projectService.getAllUsersForProject(id);
+    }
+
+    @GET
     @Path("/{id}/backlog")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Task> getBacklogForProject(@PathParam("id") Long id) {
@@ -68,7 +75,7 @@ public class ProjectResource {
         return projectService.update(project);
     }
 
-    @PUT
+    @POST
     @Path("/{id}/user")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)

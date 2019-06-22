@@ -1,5 +1,6 @@
 package api.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,6 +22,8 @@ public class User {
     private String email;
     @NotNull
     private Role role;
+    @Column(name = "project_id")
+    private Long projectId;
 
     public User() {
     }
@@ -61,6 +64,14 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public Long getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(Long projectId) {
+        this.projectId = projectId;
     }
 
     @Override

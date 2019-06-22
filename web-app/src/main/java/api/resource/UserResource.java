@@ -1,5 +1,6 @@
 package api.resource;
 
+import api.domain.Role;
 import api.domain.User;
 import api.service.UserService;
 
@@ -15,6 +16,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Path("/users")
 public class UserResource {
@@ -26,6 +29,13 @@ public class UserResource {
     @Produces(MediaType.APPLICATION_JSON)
     public List<User> getUsers() {
         return userService.findAll();
+    }
+
+    @GET
+    @Path("/roles")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<String> getRoles() {
+        return Stream.of(Role.values()).map(Role::getName).collect(Collectors.toList());
     }
 
     @GET

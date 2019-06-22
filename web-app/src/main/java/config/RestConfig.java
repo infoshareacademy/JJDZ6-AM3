@@ -2,6 +2,7 @@ package config;
 
 import api.resource.ProjectResource;
 import api.resource.SprintResource;
+import api.resource.StateResource;
 import api.resource.TaskResource;
 import api.resource.UserResource;
 
@@ -19,6 +20,7 @@ public class RestConfig extends Application {
         resources.add(UserResource.class);
         resources.add(SprintResource.class);
         resources.add(ProjectResource.class);
+        resources.add(StateResource.class);
         resources.add(ConstraintViolationMapper.class);
         resources.add(CorsFilter.class);
         return resources;

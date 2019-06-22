@@ -54,7 +54,7 @@ public class TaskRepositoryImpl implements TaskRepository {
     @Override
     public List<Task> getAllTasksForBacklog(Long id) {
         return entityManager
-                .createQuery("SELECT t FROM Task t WHERE t.project_id = :id AND t.sprint_id IS NULL")
+                .createQuery("SELECT t FROM Task t WHERE t.projectId = :id AND t.sprintId IS NULL")
                 .setParameter("id", id)
                 .getResultList();
 

@@ -1,6 +1,7 @@
 package api.resource;
 
 import api.domain.Task;
+import api.domain.Type;
 import api.domain.User;
 import api.service.TaskService;
 
@@ -15,12 +16,28 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Path("/tasks")
 public class TaskResource {
 
     @Inject
     TaskService taskService;
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Task> getTask() {
+        return taskService.findAll();
+    }
+
+    @GET
+    @Path("/types")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<String> getIssueTypes() {
+        return Stream.of(Type.values()).map(Type::getName).collect(Collectors.toList());
+    }
 
     @GET
     @Path("/{id}")
@@ -50,7 +67,7 @@ public class TaskResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Task assignUser(@PathParam("id") Long id, @Valid User user) {
-        return taskService.assignUser(id,user);
+        return taskService.assignUser(id, user);
     }
 
     @DELETE

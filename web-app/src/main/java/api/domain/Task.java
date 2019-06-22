@@ -1,5 +1,9 @@
 package api.domain;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -25,15 +29,34 @@ public class Task {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "assignee_id", referencedColumnName = "id")
     private User assignee;
-    private String projectId;
+    @Column(name = "project_id")
+    private Long projectId;
+    @Column(name = "sprint_id")
+    private Long sprintId;
 
     public Task() {
     }
 
-    public Task(String title, Type type, Status status) {
+    @JsonCreator
+    public Task(
+            @JsonProperty("title") String title,
+            @JsonProperty("type") String type,
+            @JsonProperty("description") String description,
+            @JsonProperty("priority") String priority,
+            @JsonProperty("storyPoints") Integer storyPoints,
+            @JsonProperty("status") Status status,
+            @JsonProperty("assignee") User assignee,
+            @JsonProperty("projectId") Long projectId,
+            @JsonProperty("sprintId") Long sprintId) {
         this.title = title;
-        this.type = type;
+        this.type = Type.fromString(type);
+        this.description = description;
+        this.priority = Priority.fromString(priority);
+        this.storyPoints = storyPoints;
         this.status = status;
+        this.assignee = assignee;
+        this.projectId = projectId;
+        this.sprintId = sprintId;
     }
 
     public Long getId() {
@@ -92,14 +115,6 @@ public class Task {
         this.priority = priority;
     }
 
-    public String getProjectId() {
-        return projectId;
-    }
-
-    public void setProjectId(String projectId) {
-        this.projectId = projectId;
-    }
-
     public User getAssignee() {
         return assignee;
     }
@@ -108,10 +123,26 @@ public class Task {
         this.assignee = assignee;
     }
 
+    public Long getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(Long projectId) {
+        this.projectId = projectId;
+    }
+
+    public Long getSprintId() {
+        return sprintId;
+    }
+
+    public void setSprintId(Long sprintId) {
+        this.sprintId = sprintId;
+    }
+
     @Override
     public String toString() {
         return "Task{" +
-                "id='" + id + '\'' +
+                "id=" + id +
                 ", title='" + title + '\'' +
                 ", type=" + type +
                 ", description='" + description + '\'' +
@@ -119,7 +150,7 @@ public class Task {
                 ", storyPoints=" + storyPoints +
                 ", status=" + status +
                 ", assignee=" + assignee +
-                ", projectId='" + projectId + '\'' +
+                ", projectId=" + projectId +
                 '}';
     }
 }

@@ -130,4 +130,6 @@ Backlog.json
 Sprints.json
 Scrum.json
 
+web-app/frontend/node_modules/
+
 # End of https://www.gitignore.io/api/maven,macos,intellij

@@ -1,7 +1,7 @@
 package api.domain;
 
-import javax.json.bind.annotation.JsonbCreator;
-import javax.json.bind.annotation.JsonbProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public enum State {
     ACTIVE("Active"),
@@ -13,8 +13,8 @@ public enum State {
         this.state = state;
     }
 
-    @JsonbCreator
-    public static State fromString(@JsonbProperty("state") String state) {
+    @JsonCreator
+    public static State fromString(@JsonProperty("state") String state) {
         for (State s : State.values()) {
             if (s.state.equalsIgnoreCase(state)) {
                 return s;

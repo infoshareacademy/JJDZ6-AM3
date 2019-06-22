@@ -42,4 +42,11 @@ public class UserRepositoryImpl implements UserRepository {
         return entityManager.merge(user);
     }
 
+    @Override
+    public List<User> findAllUsersForProject(Long id) {
+        return entityManager
+                .createQuery("SELECT u FROM User u WHERE u.projectId = :id")
+                .setParameter("id", id)
+                .getResultList();
+    }
 }

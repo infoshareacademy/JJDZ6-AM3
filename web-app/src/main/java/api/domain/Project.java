@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
 import java.util.Set;
 
 @Entity
@@ -15,6 +16,7 @@ public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
+    @NotBlank(message="Name cannot be blank")
     private String name;
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "project_id")
