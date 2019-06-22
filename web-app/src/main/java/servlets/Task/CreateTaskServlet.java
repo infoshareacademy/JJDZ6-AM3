@@ -1,7 +1,7 @@
 package servlets.Task;
 
 import api.domain.Project;
-import api.domain.State;
+import api.domain.Status;
 import api.domain.Type;
 import api.domain.User;
 import api.service.ProjectService;
@@ -37,7 +37,7 @@ public class CreateTaskServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         List<Type> types = Stream.of(Type.values()).collect(Collectors.toList());
-        List<State> states = Stream.of(State.values()).collect(Collectors.toList());
+        List<Status> statuses = Stream.of(Status.values()).collect(Collectors.toList());
         List<Project> projects = projectService.findAll();
         List<User> users = userService.findAll();
 
@@ -45,7 +45,7 @@ public class CreateTaskServlet extends HttpServlet {
         Map<String, Object> model = new HashMap<>();
 
         model.put("types", types);
-        model.put("states", states);
+        model.put("statuses", statuses);
         model.put("projects", projects);
         model.put("users", users);
 

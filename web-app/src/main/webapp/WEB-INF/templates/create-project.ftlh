@@ -10,6 +10,20 @@
                     <input class="text" type="text" id="name" name="name" value="${project???then(project.name,"")}">
                     <div class="error"></div>
                 </div>
+                <form class="aui">
+                    <div class="field-group">
+                        <label for="multiselect">Multi select</label>
+                        <select class="multi-select" size="4" multiple="multiple" id="multiselect" name="multiselect">
+                            <#list users as user>
+                                <option
+                        <#if task??>
+                            <#if task.getAssignee()???then(task.getAssignee().getId(),"") == user.id>selected</#if>
+                        </#if>
+                            value="${user.id}">${user.fullName}</option>
+                            </#list>
+                        </select>
+                    </div>
+                </form>
                 <div class="buttons-container">
                     <div class="buttons">
                         <input class="aui-button aui-button-primary" type="button"

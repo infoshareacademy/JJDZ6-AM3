@@ -1,7 +1,7 @@
 package servlets.Task;
 
 import api.domain.Project;
-import api.domain.State;
+import api.domain.Status;
 import api.domain.Task;
 import api.domain.Type;
 import api.domain.User;
@@ -45,14 +45,14 @@ public class EditTaskServlet extends HttpServlet {
         Task task = taskService.findById(id);
 
         List<Type> types = Stream.of(Type.values()).collect(Collectors.toList());
-        List<State> states = Stream.of(State.values()).collect(Collectors.toList());
+        List<Status> statuses = Stream.of(Status.values()).collect(Collectors.toList());
         List<Project> projects = projectService.findAll();
         List<User> users = userService.findAll();
 
         Map<String, Object> model = new HashMap<>();
         model.put("task", task);
         model.put("types", types);
-        model.put("states", states);
+        model.put("statuses", statuses);
         model.put("projects", projects);
         model.put("users", users);
 

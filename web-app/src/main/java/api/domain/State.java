@@ -1,18 +1,30 @@
 package api.domain;
 
+import javax.json.bind.annotation.JsonbCreator;
+import javax.json.bind.annotation.JsonbProperty;
+
 public enum State {
-    TO_DO("To do"),
-    DONE("Done"),
-    IN_PROGRESS("In progress"),
-    READY_FOR_TESTING("Ready for testing");
+    ACTIVE("Active"),
+    CLOSED("Closed");
 
-    public String name;
+    public String state;
 
-    State(String name) {
-        this.name = name;
+    private State(String state) {
+        this.state = state;
     }
 
-    public String getName() {
-        return name;
+    @JsonbCreator
+    public static State fromString(@JsonbProperty("state") String state) {
+        for (State s : State.values()) {
+            if (s.state.equalsIgnoreCase(state)) {
+                return s;
+            }
+        }
+        return null;
     }
+
+    public String getState() {
+        return state;
+    }
+
 }

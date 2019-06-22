@@ -1,6 +1,7 @@
 package api.repository;
 
 import api.domain.Project;
+import api.domain.Sprint;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;

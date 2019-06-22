@@ -1,6 +1,9 @@
 package api.resource;
 
 import api.domain.Project;
+import api.domain.Sprint;
+import api.domain.Task;
+import api.domain.User;
 import api.service.ProjectService;
 
 import javax.inject.Inject;
@@ -35,6 +38,20 @@ public class ProjectResource {
         return projectService.findById(id);
     }
 
+    @GET
+    @Path("/{id}/sprint")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Sprint> getAllSprintsForProject(@PathParam("id") Long id) {
+        return projectService.getAllSprintsForProject(id);
+    }
+
+    @GET
+    @Path("/{id}/backlog")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Task> getBacklogForProject(@PathParam("id") Long id) {
+        return projectService.getBacklog(id);
+    }
+
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -46,8 +63,25 @@ public class ProjectResource {
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Project updateProject(@PathParam("id") String id, @Valid Project project) {
+    public Project updateProjectName(@PathParam("id") Long id, Project project) {
+        project.setId(id);
         return projectService.update(project);
+    }
+
+    @PUT
+    @Path("/{id}/user")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void addUserToProject(@PathParam("id") Long id, User user) {
+        projectService.addUserToProject(id, user);
+    }
+
+    @POST
+    @Path("/{id}/task")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void addTaskToProject(@PathParam("id") Long id, Task task) {
+        projectService.addTaskToProject(id, task);
     }
 
     @DELETE

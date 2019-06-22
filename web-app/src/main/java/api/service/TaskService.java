@@ -18,7 +18,7 @@ public class TaskService {
     UserRepository userRepository;
 
     public Task saveTask(Task task) {
-        return taskRepository.save(setAssignee(task));
+        return taskRepository.save(task);
     }
 
     public Task findById(Long id) {
@@ -34,15 +34,20 @@ public class TaskService {
     }
 
     public Task update(Task task) {
-        return taskRepository.update(setAssignee(task));
+        Task taskEntity = taskRepository.findById(task.getId());
+        taskEntity.setTitle(task.getTitle());
+        taskEntity.setDescription(task.getDescription());
+        return taskRepository.update(taskEntity);
     }
 
-    private Task setAssignee(Task task) {
-        if (task.getAssignee() != null) {
-            User assignee = userRepository.findById(task.getAssignee().getId());
-            task.setAssignee(assignee);
-        }
-        return task;
+    public Task assignUser(Long id, User user) {
+        User userEntity = userRepository.findById(user.getId());
+        Task taskEntity = taskRepository.findById(id);
+
+        taskEntity.setAssignee(userEntity);
+
+        return taskRepository.update(taskEntity);
     }
+
 
 }

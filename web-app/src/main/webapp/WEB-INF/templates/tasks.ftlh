@@ -24,7 +24,7 @@
             <td class="name"><span class="tag ${task.type?lower_case}">${task.type.getName()}</span></td>
             <td class="title">${task.title}</td>
             <td class="description"><#if task.description??>${task.description}</#if></td>
-            <td class="title">${task.state.getName()}</td>
+            <td class="title">${task.status.getName()}</td>
             <td class="story-points"><#if task.storyPoints??><span>${task.storyPoints}</span></#if></td>
             <td class="assigne"><#if task.assignee??><span>${task.assignee.fullName}</span></#if></td>
             <td class="actions">

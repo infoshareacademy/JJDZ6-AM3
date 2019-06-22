@@ -42,7 +42,7 @@
         e.preventDefault();
         const name = document.getElementById('name').value;
         const description = document.getElementById('description').value;
-        const state = document.getElementById('state').value;
+        const status = document.getElementById('status').value;
         const type = document.getElementById('type').value;
         const storyPoints = document.getElementById('story-points').value;
         const assigneeId = document.getElementById('assignee').value;
@@ -51,7 +51,7 @@
                 const { data } = await createTask({
                     name,
                     description,
-                    state,
+                    status,
                     type,
                     ...storyPoints ? { storyPoints } : { storyPoints: null },
                     assignee: assigneeId ? { id: assigneeId } : null
@@ -62,7 +62,7 @@
                 const { data } = await updateTask(id, {
                     name,
                     description,
-                    state,
+                    status,
                     type,
                     ...storyPoints ? { storyPoints } : { storyPoints: null },
                     assignee: assigneeId ? { id: assigneeId } : null

@@ -43,4 +43,12 @@ public class SprintRepositoryImpl implements SprintRepository {
         return entityManager.merge(sprint);
     }
 
+    @Override
+    public List<Sprint> findAllSprintsForProject(Long id) {
+        return entityManager
+                .createQuery("SELECT s FROM Sprint s WHERE s.projectId = :id")
+                .setParameter("id", id)
+                .getResultList();
+    }
+
 }

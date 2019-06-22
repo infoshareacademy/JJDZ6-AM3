@@ -43,4 +43,21 @@ public class TaskRepositoryImpl implements TaskRepository {
         return entityManager.merge(task);
     }
 
+    public List<Task> findByIds(List<Long> ids) {
+        return entityManager
+                .createQuery("SELECT t FROM Task t WHERE t.id IN :ids")
+                .setParameter("ids", ids)
+                .getResultList();
+
+    }
+
+    @Override
+    public List<Task> getAllTasksForBacklog(Long id) {
+        return entityManager
+                .createQuery("SELECT t FROM Task t WHERE t.project_id = :id AND t.sprint_id IS NULL")
+                .setParameter("id", id)
+                .getResultList();
+
+    }
+
 }

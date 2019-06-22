@@ -45,11 +45,11 @@
                     </select>
                 </div>
             <div class="field-group">
-            <label for="state">Status</label>
-            <select class="select" id="state" name="state">
-            <#list states as state>
-                <option <#if task???then(task.state,"TO_DO") == state>selected</#if>
-                        value="${state}">${state.getName()}</option>
+            <label for="status">Status</label>
+            <select class="select" id="status" name="status">
+            <#list statuses as status>
+                <option <#if task???then(task.status,"TO_DO") == status>selected</#if>
+                        value="${status}">${status.getName()}</option>
             </#list>
             </select>
             </div>
@@ -78,7 +78,7 @@
         e.preventDefault();
         const title = document.getElementById('title').value;
         const description = document.getElementById('description').value;
-        const state = document.getElementById('state').value;
+        const status = document.getElementById('status').value;
         const type = document.getElementById('type').value;
         const storyPoints = document.getElementById('story-points').value;
         const assigneeId = document.getElementById('assignee').value;
@@ -87,7 +87,7 @@
                 const { data } = await createTask({
                     title,
                     description,
-                    state,
+                    status,
                     type,
                     ...storyPoints ? { storyPoints } : { storyPoints: null },
                     assignee: assigneeId ? { id: assigneeId } : null
@@ -98,7 +98,7 @@
                 const { data } = await updateTask(id, {
                     title,
                     description,
-                    state,
+                    status,
                     type,
                     ...storyPoints ? { storyPoints } : { storyPoints: null },
                     assignee: assigneeId ? { id: assigneeId } : null

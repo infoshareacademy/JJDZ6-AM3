@@ -1,11 +1,16 @@
 package api.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -17,8 +22,13 @@ public class Sprint {
     private String name;
     private Date startDate;
     private Date endDate;
-    @OneToMany
+    private State state;
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "sprint_id")
     private Set<Task> tasks;
+    @Column(name = "project_id")
+    @NotNull
+    private Long projectId;
 
     public Sprint() {
     }
@@ -65,5 +75,25 @@ public class Sprint {
 
     public void setTasks(Set<Task> tasks) {
         this.tasks = tasks;
+    }
+
+    public State getState() {
+        return state;
+    }
+
+    public void setState(State state) {
+        this.state = state;
+    }
+
+    public Long getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(Long projectId) {
+        this.projectId = projectId;
+    }
+
+    public void addTasksToSprint(List<Task> tasks) {
+        this.tasks.addAll(tasks);
     }
 }

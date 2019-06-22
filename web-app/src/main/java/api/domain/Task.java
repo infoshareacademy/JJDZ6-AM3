@@ -1,11 +1,12 @@
 package api.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 
 @Entity
@@ -20,8 +21,8 @@ public class Task {
     private String description;
     private Priority priority;
     private Integer storyPoints;
-    private State state;
-    @OneToOne
+    private Status status;
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "assignee_id", referencedColumnName = "id")
     private User assignee;
     private String projectId;
@@ -29,10 +30,10 @@ public class Task {
     public Task() {
     }
 
-    public Task(String title, Type type, State state) {
+    public Task(String title, Type type, Status status) {
         this.title = title;
         this.type = type;
-        this.state = state;
+        this.status = status;
     }
 
     public Long getId() {
@@ -43,12 +44,12 @@ public class Task {
         this.id = id;
     }
 
-    public State getState() {
-        return state;
+    public Status getStatus() {
+        return status;
     }
 
-    public void setState(State state) {
-        this.state = state;
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public Integer getStoryPoints() {
@@ -116,7 +117,7 @@ public class Task {
                 ", description='" + description + '\'' +
                 ", priority=" + priority +
                 ", storyPoints=" + storyPoints +
-                ", state=" + state +
+                ", status=" + status +
                 ", assignee=" + assignee +
                 ", projectId='" + projectId + '\'' +
                 '}';
