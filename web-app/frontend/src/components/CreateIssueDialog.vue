@@ -8,10 +8,10 @@
                 <TextArea v-model="task.description"/>
             </FieldGroup>
             <FieldGroup label="Type" required>
-                <Select :options="normalizedTypes" @input="onTypeSelected"/>
+                <Select v-model="task.type" :options="types"/>
             </FieldGroup>
             <FieldGroup label="Project" required>
-                <Select :options="normalizedProjects" @input="onProjectSelected"/>
+                <Select v-model="project" :normalizer="normalizer" :options="projects"/>
             </FieldGroup>
         </div>
     </Modal>
@@ -34,18 +34,17 @@ export default {
                 priority: "",
                 projectId: undefined
             },
+            project: undefined,
             types: [],
             projects: []
         };
     },
-    computed: {
-        normalizedTypes() {
-            return this.types.map((label, id) => ({ id, label }))
-        },
-        normalizedProjects() {
-            return this.projects.map(project => ({ id: project.id, label: project.name }))
+    watch: {
+        project(project) {
+            this.task.projectId = project && project.id;
         }
     },
+
     async mounted() {
         const [types, projects] = await Promise.all([getTypes(), getProjects()]);
         this.types = types.data;
@@ -61,12 +60,11 @@ export default {
                 this.onClose();
             }
         },
-        onTypeSelected(id) {
-            this.task.type = this.normalizedTypes.find(type => type.id === id).label;
+
+        normalizer(project) {
+            return { id: project.id, label: project.name, value: project }
         },
-        onProjectSelected(id) {
-            this.task.projectId = id;
-        },
+
         onClose() {
             this.$router.back();
         }

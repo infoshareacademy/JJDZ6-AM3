@@ -1,5 +1,6 @@
 package api.resource;
 
+import api.domain.Status;
 import api.domain.Task;
 import api.domain.Type;
 import api.domain.User;
@@ -37,6 +38,13 @@ public class TaskResource {
     @Produces(MediaType.APPLICATION_JSON)
     public List<String> getIssueTypes() {
         return Stream.of(Type.values()).map(Type::getName).collect(Collectors.toList());
+    }
+
+    @GET
+    @Path("/statuses")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<String> getIssueStatuses() {
+        return Stream.of(Status.values()).map(Status::getName).collect(Collectors.toList());
     }
 
     @GET

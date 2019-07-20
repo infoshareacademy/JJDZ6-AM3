@@ -68,9 +68,10 @@ export const getTasks = () => client.get('/tasks');
 export const getTask = (id) => client.get(`/tasks/${id}`);
 export const createTask = (params) => client.post('/tasks', { ...params }).catch(handleError);
 export const deleteTask = (id) => client.delete(`/tasks/${id}`).catch(handleError);
-export const updateTask = (id, params) => client.put(`/tasks/${id}`, { ...params }).catch(handleError);
+export const updateTask = (id, task) => client.put(`/tasks/${id}`, task).catch(handleError);
 
 export const getTypes = () => client.get('/tasks/types');
+export const getStatuses = () => client.get('/tasks/statuses');
 
 export const getUsers = () => client.get('/users');
 export const getUser = (id) => client.get(`/users/${id}`);
@@ -78,6 +79,10 @@ export const getUserRoles = (id) => client.get(`/users/roles`);
 export const createUser = (params) => client.post('/users', { ...params }).catch(handleError);
 export const deleteUser = (id) => client.delete(`/users/${id}`).catch(handleError);
 export const updateUser = (id, params) => client.put(`/users/${id}`, { ...params }).catch(handleError);
+
+export const createSprint = (params) => client.post('/sprints', { ...params }).catch(handleError);
+export const addTasksToSprint = (tasks, id) => client.post(`/sprints/${id}/tasks`, { tasks }).catch(handleError);
+
 
 export const getProjects = () => client.get('/projects');
 export const getProject = (id) => client.get(`/projects/${id}`);

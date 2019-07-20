@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <Button appearance="primary" class="md-primary" @click="createProject">Create Project</Button>
     <br>
     <br>
@@ -63,4 +63,7 @@ export default {
 };
 </script>
 <style scoped>
+  .container {
+      height: 100%;
+  }
 </style>

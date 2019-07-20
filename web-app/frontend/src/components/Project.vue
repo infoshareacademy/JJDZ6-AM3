@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <header>
       <h3>{{ project.name }}</h3>
     </header>
@@ -32,5 +32,13 @@ export default {
 <style scoped>
 .content {
     padding: 20px;
+    height: 100%;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    align-items: stretch;
 }
 </style>

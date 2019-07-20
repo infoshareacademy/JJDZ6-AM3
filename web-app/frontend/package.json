@@ -8,7 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "@spartez/vue-atlaskit": "0.0.30",
+    "@spartez/vue-atlaskit": "0.0.32",
     "axios": "^0.18.0",
     "core-js": "^2.6.5",
     "vue": "^2.6.10",

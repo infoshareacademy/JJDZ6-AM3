@@ -2,6 +2,8 @@ package api.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,6 +24,8 @@ public class Sprint {
     private String name;
     private Date startDate;
     private Date endDate;
+    @Column(name = "state", nullable = false, columnDefinition = "enum('CLOSED')")
+    @Enumerated(EnumType.STRING)
     private State state;
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "sprint_id")

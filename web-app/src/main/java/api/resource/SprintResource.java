@@ -41,7 +41,7 @@ public class SprintResource {
     @POST
     @Path("/{id}/tasks")
     public Response addTasksToSprint(@PathParam("id") Long id, Tasks tasks) {
-        sprintService.moveTasksToSprint(id, tasks);
+            sprintService.moveTasksToSprint(id, tasks);
         return Response.ok().build();
     }
 

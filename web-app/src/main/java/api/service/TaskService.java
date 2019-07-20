@@ -37,6 +37,7 @@ public class TaskService {
         Task taskEntity = taskRepository.findById(task.getId());
         taskEntity.setTitle(task.getTitle());
         taskEntity.setDescription(task.getDescription());
+        taskEntity.setSprintId(task.getSprintId());
         return taskRepository.update(taskEntity);
     }
 
