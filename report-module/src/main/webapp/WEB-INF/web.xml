@@ -1,0 +1,11 @@
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+
+  <data-source>
+    <name>java:ds/scrumds</name>
+    <class-name>com.mysql.cj.jdbc.MysqlDataSource</class-name>
+    <url>jdbc:mysql://127.0.0.1:3306/dashboard?useLegacyDatetimeCode=false&amp;serverTimezone=UTC</url>
+    <user>root</user>
+    <password>root</password>
+  </data-source>
+</web-app>
