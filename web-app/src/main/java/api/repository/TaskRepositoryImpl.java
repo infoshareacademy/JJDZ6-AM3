@@ -1,6 +1,10 @@
 package api.repository;
 
 import api.domain.Task;
+import org.apache.lucene.search.Query;
+import org.hibernate.search.jpa.FullTextEntityManager;
+import org.hibernate.search.jpa.Search;
+import org.hibernate.search.query.dsl.QueryBuilder;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -57,7 +61,28 @@ public class TaskRepositoryImpl implements TaskRepository {
                 .createQuery("SELECT t FROM Task t WHERE t.projectId = :id AND t.sprintId IS NULL")
                 .setParameter("id", id)
                 .getResultList();
+    }
 
+    public List<Task> search(String search) {
+
+        final FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(entityManager);
+
+        final QueryBuilder qb = fullTextEntityManager
+                .getSearchFactory()
+                .buildQueryBuilder()
+                .forEntity(Task.class)
+                .get();
+
+        final Query query = qb
+                .keyword()
+                .wildcard()
+                .onField("title")
+                .matching(search + "*")
+                .createQuery();
+
+        return fullTextEntityManager
+                .createFullTextQuery(query, Task.class)
+                .getResultList();
     }
 
 }

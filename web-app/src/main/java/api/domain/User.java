@@ -1,5 +1,8 @@
 package api.domain;
 
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,11 +14,13 @@ import javax.validation.constraints.NotNull;
 
 
 @Entity
+@Indexed
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     @NotBlank(message = "Please provide a user name")
+    @Field
     private String fullName;
     @Email(message = "This is not a valid email")
     @NotBlank(message = "Please provide a user email")

@@ -1,71 +1,34 @@
 <template>
   <div>
-    <router-view/>
-    <Button appearance="primary" @click="onSprintCreate">Crate Sprint</Button>
-    <header>
-        <h1>Sprints</h1>
-    </header>
+    <router-view @operation-finished="fetchResources"/>
+    <Button class="create-sprint" appearance="primary" @click="onSprintCreate">Crate Sprint</Button>
     <div class="sprint" v-for="sprint in sprints">
         <h2>{{sprint.name}}</h2>
-        <DropTarget tag="table" @drop="addToSprint" :target="sprint.id">
-      <thead>
-        <tr>
-            <td>ID</td>
-            <td>Type</td>
-            <td>Priority</td>
-            <td>Title</td>
-            <td>Assignee</td>
-        </tr>
-      </thead>
-            <tbody>
-            <DragTarget v-for="task in sprint.tasks" tag="tr" :transferData="task">
-                <td>{{ task.id }}</td>
-                <td>{{ task.type }}</td>
-                <td>{{ task.priority }}</td>
-                <td>
-                    <a href @click.prevent="onRouterPush(task.id)">{{ task.title }}</a>
-                </td>
-                <td>{{ task.assignee }}</td>
-                <td>{{ task.assignee }}</td>
-              </DragTarget>
-            </tbody>
+        <DropTarget @drop="addToSprint" :target="sprint.id" class="sprint-drop-zone" :drop-zone="!sprint.tasks.length">
+            <DragTarget class="issue" v-for="task in sprint.tasks" :transferData="task">
+                <Issue :task="task" @router-push="onRouterPush"/>
+            </DragTarget>
         </DropTarget>
     </div>
     <h1>Backlog</h1>
-      <DropTarget :target="null" tag="table" @drop="addToBacklog">
-      <thead>
-        <tr>
-            <td>ID</td>
-            <td>Type</td>
-            <td>Priority</td>
-            <td>Title</td>
-            <td>Assignee</td>
-        </tr>
-      </thead>
-          <tbody>
-                <DragTarget v-for="task in backlog" tag="tr" :transferData="task">
-            <td>{{ task.id }}</td>
-            <td>{{ task.type }}</td>
-            <td>{{ task.priority }}</td>
-            <td>
-                <a href @click.prevent="onRouterPush(task.id)">{{ task.title }}</a>
-            </td>
-            <td>{{ task.assignee }}</td>
-        </DragTarget>
-          </tbody>
+      <DropTarget :target="null" @drop="addToBacklog">
+          <DragTarget class="issue" v-for="task in backlog" :transferData="task">
+              <Issue :task="task" @router-push="onRouterPush"/>
+          </DragTarget>
       </DropTarget>
   </div>
 </template>
 
 <script>
 import { addTasksToSprint, getBacklogForProject, getSprintsForProject, getTask, updateTask } from "../services/scrum-board-api";
-import { Button } from '@spartez/vue-atlaskit'
+import { Button, Select } from '@spartez/vue-atlaskit'
 import DragTarget from './common/DragTarget'
 import DropTarget from './common/DropTarget'
+import Issue from './Issue'
 
 export default {
     name: "Backlog",
-    components: { Button, DragTarget, DropTarget },
+    components: { Button, DragTarget, DropTarget, Select, Issue },
     props: {
         projectId: { type: Number, required: true }
     },
@@ -108,31 +71,42 @@ export default {
 </script>
 <style scoped>
 
-   header{
+   .create-sprint {
+       margin-bottom: 30px;
+   }
+
+   table {
+       width: 100%;
+       table-layout: fixed;
+       text-align: left;
+   }
+
+   h2 {
+       text-transform: uppercase;
+       margin-bottom: 20px;
+       border-bottom: 1px solid gray;
+   }
+
+   .sprint {
        margin-bottom: 50px;
    }
 
-  table {
-      width: 100%;
-  }
+   .sprint-drop-zone[drop-zone] {
+       padding: 30px;
+       border: 2px dashed #DFE1E6;
+       position: relative;
+   }
 
-  .sprint {
-      margin-bottom: 50px;
-  }
+   .sprint-drop-zone[drop-zone]::after {
+       position: absolute;
+       top: 50%;
+       left: 50%;
+       transform: translate(-50%, -50%);
+       content: 'Drop task here';
+       color: #DFE1E6;
+   }
 
-  tbody tr {
-      cursor: grab;
-  }
-
-  tbody {
-      min-height: 500px;
-      padding: 50px;
-      width: 100%;
-  }
-
-  .drop-zone {
-      height: 50px;
-      width: 100%;
-      border: dashed 2px grey;
-  }
+   .issue:first-of-type {
+       border-top: 1px solid #DFE1E6;
+   }
 </style>

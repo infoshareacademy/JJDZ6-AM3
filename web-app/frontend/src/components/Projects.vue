@@ -54,7 +54,6 @@ export default {
             try {
                 const { data: projects } = await getProjects();
                 this.projects = projects;
-                console.log(projects)
             } catch (e) {
                 console.error(e);
             }

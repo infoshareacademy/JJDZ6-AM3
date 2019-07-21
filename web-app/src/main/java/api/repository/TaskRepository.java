@@ -10,4 +10,6 @@ public interface TaskRepository extends GenericRepository<Task, Long> {
     List<Task> findByIds(List<Long> taskIds);
 
     List<Task> getAllTasksForBacklog(Long id);
+
+    List<Task> search(String query);
 }

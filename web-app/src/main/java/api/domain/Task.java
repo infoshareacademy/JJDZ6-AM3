@@ -2,6 +2,8 @@ package api.domain;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,17 +16,21 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 
 @Entity
+@Indexed
 public class Task {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     @NotBlank(message = "Title must not be empty")
+    @Field
     private String title;
     private Type type;
     private String description;
+    @NotBlank(message = "You have to specify priority")
     private Priority priority;
     private Integer storyPoints;
+    @NotBlank(message = "You have to specify status")
     private Status status;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "assignee_id", referencedColumnName = "id")

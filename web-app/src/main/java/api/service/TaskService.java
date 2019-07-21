@@ -51,4 +51,7 @@ public class TaskService {
     }
 
 
+    public List<Task> search(String query) {
+        return taskRepository.search(query);
+    }
 }

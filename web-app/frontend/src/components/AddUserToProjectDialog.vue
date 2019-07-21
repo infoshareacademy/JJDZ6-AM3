@@ -15,7 +15,7 @@ import { Modal, Input, FieldGroup, TextArea } from '@spartez/vue-atlaskit'
 
 export default {
     name: "AddUserToProjectDialog",
-    components: { Modal, Input, FieldGroup, TextArea },
+    components: { Input, FieldGroup, TextArea, Modal },
     props: {
         projectId: {
             type: Number,

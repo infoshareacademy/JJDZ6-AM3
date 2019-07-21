@@ -1,4 +1,5 @@
 import Projects from '../components/Projects'
+import Search from '../components/Search'
 import ProjectActions from '../components/ProjectActions'
 import addProjectDialog from '../components/AddProjectDialog'
 import Backlog from '../components/Backlog'
@@ -95,4 +96,5 @@ export const routes = [
         components: { default: CreateIssueDialog }
     },
     { path: '/create-user', component: CreateUserDialog },
+    { path: '/search', component: Search },
 ];

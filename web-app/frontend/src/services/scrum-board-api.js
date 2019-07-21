@@ -64,7 +64,7 @@ const handleError = (error) => {
     }
 };
 
-export const getTasks = () => client.get('/tasks');
+export const getTasks = ({ query = "" }) => client.get('/tasks', { params: { query } });
 export const getTask = (id) => client.get(`/tasks/${id}`);
 export const createTask = (params) => client.post('/tasks', { ...params }).catch(handleError);
 export const deleteTask = (id) => client.delete(`/tasks/${id}`).catch(handleError);
@@ -73,7 +73,7 @@ export const updateTask = (id, task) => client.put(`/tasks/${id}`, task).catch(h
 export const getTypes = () => client.get('/tasks/types');
 export const getStatuses = () => client.get('/tasks/statuses');
 
-export const getUsers = () => client.get('/users');
+export const getUsers = ({ query = "" }) => client.get('/users', { params: { query } });
 export const getUser = (id) => client.get(`/users/${id}`);
 export const getUserRoles = (id) => client.get(`/users/roles`);
 export const createUser = (params) => client.post('/users', { ...params }).catch(handleError);

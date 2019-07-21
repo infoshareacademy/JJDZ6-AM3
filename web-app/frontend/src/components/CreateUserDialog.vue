@@ -16,12 +16,12 @@
 
 <script>
 import { getUserRoles, createUser } from "../services/scrum-board-api";
-import { FieldGroup, Input, TextArea } from '@spartez/vue-atlaskit';
+import { FieldGroup, Input, TextArea, Modal } from '@spartez/vue-atlaskit';
 
 
 export default {
     name: "CreateUserDialog",
-    components: { FieldGroup, Input, TextArea },
+    components: { FieldGroup, Input, TextArea, Modal },
     data() {
         return {
             user: {

@@ -33,4 +33,7 @@ public class UserService {
         return userRepository.update(user);
     }
 
+    public List<User> search(String query) {
+        return userRepository.search(query);
+    }
 }

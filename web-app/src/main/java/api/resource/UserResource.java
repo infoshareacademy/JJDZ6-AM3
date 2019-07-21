@@ -14,6 +14,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,7 +28,10 @@ public class UserResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<User> getUsers() {
+    public List<User> getUsers(@QueryParam("query") String query) {
+        if (query != null) {
+            return userService.search(query);
+        }
         return userService.findAll();
     }
 
