@@ -25,7 +25,8 @@
             return {
                 sprint: {
                     name: '',
-                    projectId: this.projectId
+                    projectId: this.projectId,
+                    state: 'CLOSED'
                 }
             }
         },

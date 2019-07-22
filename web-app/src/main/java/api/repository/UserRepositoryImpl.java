@@ -1,6 +1,7 @@
 package api.repository;
 
 import api.domain.User;
+import api.utils.PasswordUtils;
 import org.apache.lucene.search.Query;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.Search;
@@ -9,6 +10,7 @@ import org.hibernate.search.query.dsl.QueryBuilder;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Stateless
@@ -75,5 +77,25 @@ public class UserRepositoryImpl implements UserRepository {
         return fullTextEntityManager
                 .createFullTextQuery(query, User.class)
                 .getResultList();
+    }
+
+    public User authenticate(String username, String password) {
+        User user = entityManager
+                .createQuery("SELECT u FROM User u WHERE u.username = :username AND u.password = " +
+                        ":password", User.class)
+                .setParameter("username", username)
+                .setParameter("password", PasswordUtils.digestPassword(password))
+                .getSingleResult();
+
+        if (user == null) {
+            throw new SecurityException("Invalid user/password");
+        } else {
+            return user;
+        }
+    }
+
+    @Override
+    public void registerUser(User user) {
+        entityManager.persist(user);
     }
 }

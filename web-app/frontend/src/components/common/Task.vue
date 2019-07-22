@@ -1,7 +1,7 @@
 <template>
     <DragTarget :transferData="transferData">
         <div class="task">
-            {{task.name}}
+            {{task.title}}
         </div>
     </DragTarget>
 </template>

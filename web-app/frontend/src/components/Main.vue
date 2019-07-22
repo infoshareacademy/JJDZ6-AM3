@@ -4,8 +4,12 @@
       <div class="navigation">
         <router-link tag="span" to="/"><div class="tab">Dashboard</div></router-link>
         <router-link tag="span" to="/projects"><div class="tab">Projects</div></router-link>
+        <router-link v-if="!user" tag="span" to="/login"><div class="tab">Login</div></router-link>
+        <router-link tag="span" to="/register"><div class="tab">Register</div></router-link>
       </div>
       <Button class="create-issue" appearance="danger" @click="onCreateIssue">Create Issue</Button>
+      <Button v-if="user" class="create-issue" appearance="warning" @click="logout">Logout</Button>
+      <span>{{user}}</span>
     </nav>
     <section class="content" role="main">
       <Sidebar class="left-panel">
@@ -25,9 +29,18 @@ import { Button } from '@spartez/vue-atlaskit'
 export default {
     name: "Main",
     components: { Sidebar, Button },
+    computed: {
+        user() {
+            return this.$store.state.authentication.user;
+        }
+    },
     methods: {
         onCreateIssue() {
             this.$router.push({ name: "create-issue" });
+        },
+        logout() {
+            const { dispatch } = this.$store;
+            dispatch('authentication/logout');
         }
     }
 };

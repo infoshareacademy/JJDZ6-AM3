@@ -1,10 +1,13 @@
 package config;
 
+import api.resource.AuthenticationResource;
 import api.resource.ProjectResource;
 import api.resource.SprintResource;
 import api.resource.StateResource;
 import api.resource.TaskResource;
 import api.resource.UserResource;
+import errors.Unauthorized;
+import filter.AuthorizationFilter;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
@@ -23,6 +26,9 @@ public class RestConfig extends Application {
         resources.add(StateResource.class);
         resources.add(ConstraintViolationMapper.class);
         resources.add(CorsFilter.class);
+        resources.add(AuthenticationResource.class);
+        resources.add(AuthorizationFilter.class);
+        resources.add(Unauthorized.class);
         return resources;
     }
 }

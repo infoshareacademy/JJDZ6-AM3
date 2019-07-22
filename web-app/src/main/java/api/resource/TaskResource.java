@@ -1,5 +1,7 @@
 package api.resource;
 
+import annotations.Auth;
+import api.domain.Priority;
 import api.domain.Status;
 import api.domain.Task;
 import api.domain.Type;
@@ -18,11 +20,13 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Path("/tasks")
+@Auth
 public class TaskResource {
 
     @Inject
@@ -42,6 +46,13 @@ public class TaskResource {
     @Produces(MediaType.APPLICATION_JSON)
     public List<String> getIssueTypes() {
         return Stream.of(Type.values()).map(Type::getName).collect(Collectors.toList());
+    }
+
+    @GET
+    @Path("/priorities")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<String> getPriorities() {
+        return Stream.of(Priority.values()).map(Priority::getName).collect(Collectors.toList());
     }
 
     @GET
@@ -85,7 +96,8 @@ public class TaskResource {
     @DELETE
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public void deleteTask(@PathParam("id") Long id) {
+    public Response deleteTask(@PathParam("id") Long id) {
         taskService.delete(id);
+        return Response.status(Response.Status.NO_CONTENT).build();
     }
 }

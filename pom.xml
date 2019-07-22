@@ -25,6 +25,7 @@
     <modules>
         <module>web-app</module>
         <module>console-app</module>
+        <module>report-module</module>
     </modules>
 
     <dependencyManagement>

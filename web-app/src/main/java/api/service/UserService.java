@@ -36,4 +36,12 @@ public class UserService {
     public List<User> search(String query) {
         return userRepository.search(query);
     }
+
+    public User authenticate(String login, String password) throws SecurityException {
+        return userRepository.authenticate(login, password);
+    }
+
+    public void registerUser(User user) {
+        userRepository.registerUser(user);
+    }
 }

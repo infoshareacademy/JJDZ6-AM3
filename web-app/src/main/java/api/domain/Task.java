@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Indexed
@@ -27,10 +28,10 @@ public class Task {
     private String title;
     private Type type;
     private String description;
-    @NotBlank(message = "You have to specify priority")
+    @NotNull(message = "You have to specify priority")
     private Priority priority;
     private Integer storyPoints;
-    @NotBlank(message = "You have to specify status")
+    @NotNull(message = "You have to specify status")
     private Status status;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "assignee_id", referencedColumnName = "id")

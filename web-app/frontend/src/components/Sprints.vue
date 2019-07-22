@@ -1,12 +1,12 @@
 <template>
   <div class="container">
-        <Button appearance="default" class="md-primary" @click="createSprint">Create Sprint</Button>
           <table>
             <header>
               <h1>Sprints</h1>
             </header>
             <tr v-for="sprint in sprints">
               <td>{{ sprint.startDate }}</td>
+              <td>{{ sprint.name }}</td>
               <td>{{ sprint.endDate }}</td>
               <td>{{ sprint.assignee }}</td>
             </tr>

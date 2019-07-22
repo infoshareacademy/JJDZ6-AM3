@@ -3,7 +3,7 @@
         <DropTarget v-for="status in statuses" class="column"
                     @drop="onDrop" :target="status">
             <h2>{{status}}</h2>
-                <div v-for="task in todo" title="To Do">
+                <div v-for="task in sprint.tasks" title="To Do">
                     <Task :task="task" status="todo"/>
                 </div>
         </DropTarget>
@@ -13,32 +13,38 @@
 <script>
 import Task from './common/Task';
 import DropTarget from './common/DropTarget';
-import { getStatuses } from "../services/scrum-board-api";
+import { getSprint, getStatuses } from "../services/scrum-board-api";
 
 export default {
     name: "Sprint",
+    props: {
+        sprintId: {
+            type: Number,
+            required: true
+        }
+    },
     components: {
         Task,
         DropTarget
-    },
+    }
+    ,
     data() {
         return {
-            todo: [{ name: 'todo', id: 1 }],
-            isDragging: false,
-            delayedDragging: false,
+            sprint: {},
             statuses: []
         };
     },
 
     async mounted() {
         const { data: statuses } = await getStatuses();
+        const { data: sprint } = await getSprint(this.sprintId);
         this.statuses = statuses;
+        this.sprint = sprint;
     },
 
     methods: {
         onDrop(payload) {
             const { status, id, target } = payload;
-            console.log(status, id, target)
         }
     }
 };

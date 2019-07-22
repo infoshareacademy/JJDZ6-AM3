@@ -13,12 +13,18 @@
             <FieldGroup label="Project" required>
                 <Select v-model="project" :normalizer="normalizer" :options="projects"/>
             </FieldGroup>
+            <FieldGroup label="Priority" required>
+                <Select v-model="task.priority" :options="priorities"/>
+            </FieldGroup>
+            <FieldGroup label="Status" required>
+                <Select v-model="task.status" :options="statuses"/>
+            </FieldGroup>
         </div>
     </Modal>
 </template>
 
 <script>
-import { getTypes, createTask, getProjects } from "../services/scrum-board-api";
+import { getTypes, createTask, getProjects, getPriorities, getStatuses } from "../services/scrum-board-api";
 import { Modal, Input, FieldGroup, TextArea, Select } from '@spartez/vue-atlaskit'
 
 
@@ -32,10 +38,13 @@ export default {
                 description: "",
                 type: "",
                 priority: "",
+                status: "",
                 projectId: undefined
             },
             project: undefined,
             types: [],
+            priorities: [],
+            statuses: [],
             projects: []
         };
     },
@@ -46,9 +55,11 @@ export default {
     },
 
     async mounted() {
-        const [types, projects] = await Promise.all([getTypes(), getProjects()]);
+        const [types, projects, priorities, statuses] = await Promise.all([getTypes(), getProjects(), getPriorities(), getStatuses()]);
         this.types = types.data;
         this.projects = projects.data;
+        this.priorities = priorities.data;
+        this.statuses = statuses.data;
     },
     methods: {
         async createTask() {

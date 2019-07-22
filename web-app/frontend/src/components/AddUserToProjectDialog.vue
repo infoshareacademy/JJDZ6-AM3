@@ -2,7 +2,7 @@
     <Modal heading="Create Project" @submit="addUser" @cancel="onClose">
         <div slot="content">
             <FieldGroup label="Name" required>
-                <Input v-model="user.name" auto-focus/>
+                <Input v-model="user.fullName" auto-focus/>
             </FieldGroup>
         </div>
     </Modal>

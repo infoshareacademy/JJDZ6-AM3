@@ -11,8 +11,10 @@
     "@spartez/vue-atlaskit": "0.0.32",
     "axios": "^0.18.0",
     "core-js": "^2.6.5",
+    "jsonwebtoken": "^8.5.1",
     "vue": "^2.6.10",
-    "vue-router": "^3.0.6"
+    "vue-router": "^3.0.6",
+    "vuex": "^3.1.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.5",

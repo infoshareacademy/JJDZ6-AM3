@@ -1,4 +1,7 @@
 import Projects from '../components/Projects'
+import Login from '../components/Login'
+import StartSprint from '../components/StartSprint'
+import Register from '../components/Register'
 import Search from '../components/Search'
 import ProjectActions from '../components/ProjectActions'
 import addProjectDialog from '../components/AddProjectDialog'
@@ -19,16 +22,24 @@ const createSprint = {
     path: 'create-sprint',
     component: CreateSprint,
     props: route => ({
-        projectId: parseInt(route.params.id, 10) || undefined
+        projectId: parseInt(route.params.projectId, 10) || undefined
+    })
+};
+
+const startSprint = {
+    path: 'start/:id',
+    component: StartSprint,
+    props: route => ({
+        projectId: parseInt(route.params.projectId, 10) || undefined
     })
 };
 
 const backlog = {
     path: 'backlog',
     component: Backlog,
-    children: [createSprint],
+    children: [createSprint, startSprint],
     props: route => ({
-        projectId: parseInt(route.params.id, 10) || undefined
+        projectId: parseInt(route.params.projectId, 10) || undefined
     })
 };
 
@@ -36,7 +47,7 @@ const sprints = {
     path: 'sprints',
     component: Sprints,
     props: route => ({
-        projectId: parseInt(route.params.id, 10) || undefined
+        projectId: parseInt(route.params.projectId, 10) || undefined
     })
 };
 
@@ -52,7 +63,7 @@ const addUserToProject = {
     path: 'add',
     component: AddUserToProjectDialog,
     props: route => ({
-        projectId: parseInt(route.params.id, 10) || undefined
+        projectId: parseInt(route.params.projectId, 10) || undefined
     })
 };
 
@@ -61,7 +72,7 @@ const users = {
     component: Users,
     children: [addUserToProject],
     props: route => ({
-        projectId: parseInt(route.params.id, 10) || undefined
+        projectId: parseInt(route.params.projectId, 10) || undefined
     })
 };
 
@@ -71,20 +82,25 @@ const addProject = {
 };
 
 export const routes = [
-    { path: '/projects', components: { default: Projects, sidebar: ProjectActions }, children: [addProject] },
-    { path: '/tasks', component: Tasks },
     {
-        path: '/projects/:id',
+        path: '/projects',
+        components: { default: Projects, sidebar: ProjectActions },
+        children: [addProject],
+        meta: { authorize: true }
+    },
+    { path: '/tasks', component: Tasks, meta: { authorize: true } },
+    {
+        path: '/projects/:projectId',
         components: {
             default: Project,
             sidebar: ProjectSidebar,
         },
         props: {
             default: route => ({
-                projectId: parseInt(route.params.id, 10) || undefined
+                projectId: parseInt(route.params.projectId, 10) || undefined
             }),
             sidebar: route => ({
-                projectId: parseInt(route.params.id, 10) || undefined
+                projectId: parseInt(route.params.projectId, 10) || undefined
             })
         },
         children: [backlog, sprints, users, sprint]
@@ -97,4 +113,6 @@ export const routes = [
     },
     { path: '/create-user', component: CreateUserDialog },
     { path: '/search', component: Search },
+    { path: '/login', component: Login },
+    { path: '/register', component: Register },
 ];

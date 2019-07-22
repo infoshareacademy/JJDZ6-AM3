@@ -3,7 +3,9 @@
     <router-view @operation-finished="fetchResources"/>
     <Button class="create-sprint" appearance="primary" @click="onSprintCreate">Crate Sprint</Button>
     <div class="sprint" v-for="sprint in sprints">
-        <h2>{{sprint.name}}</h2>
+        <header>
+            <h2>{{sprint.name}}</h2><Button @click="onSprintStart">Start Sprint</Button>
+        </header>
         <DropTarget @drop="addToSprint" :target="sprint.id" class="sprint-drop-zone" :drop-zone="!sprint.tasks.length">
             <DragTarget class="issue" v-for="task in sprint.tasks" :transferData="task">
                 <Issue :task="task" @router-push="onRouterPush"/>
@@ -62,6 +64,9 @@ export default {
             const [backlog, sprints] = await Promise.all([getBacklogForProject(this.projectId), getSprintsForProject(this.projectId)])
             this.backlog = backlog.data;
             this.sprints = sprints.data;
+        },
+        onSprintStart() {
+            this.$router.push({ path: 'start' })
         }
     },
     async mounted() {
@@ -84,7 +89,13 @@ export default {
    h2 {
        text-transform: uppercase;
        margin-bottom: 20px;
+       display: inline-block;
        border-bottom: 1px solid gray;
+   }
+
+   header {
+       display: flex;
+       justify-content: space-between;
    }
 
    .sprint {

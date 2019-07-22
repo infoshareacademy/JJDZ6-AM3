@@ -17,7 +17,7 @@
     <data-source>
         <name>java:ds/scrumds</name>
         <class-name>com.mysql.cj.jdbc.MysqlDataSource</class-name>
-        <url>jdbc:mysql://127.0.0.1:3306/dashboard?useLegacyDatetimeCode=false&amp;serverTimezone=UTC</url>
+        <url>jdbc:mysql://db/dashboard?useLegacyDatetimeCode=false&amp;serverTimezone=UTC</url>
         <user>root</user>
         <password>root</password>
     </data-source>

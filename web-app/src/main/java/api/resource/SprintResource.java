@@ -1,5 +1,6 @@
 package api.resource;
 
+import annotations.Auth;
 import api.domain.Sprint;
 import api.domain.State;
 import api.dto.Tasks;
@@ -19,6 +20,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @Path("/sprints")
+@Auth
 public class SprintResource {
 
     @Inject
@@ -56,7 +58,8 @@ public class SprintResource {
     @DELETE
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public void deleteSprint(@PathParam("id") Long id) {
+    public Response deleteSprint(@PathParam("id") Long id) {
         sprintService.delete(id);
+        return Response.status(Response.Status.NO_CONTENT).build();
     }
 }

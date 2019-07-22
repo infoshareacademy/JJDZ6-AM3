@@ -1,5 +1,6 @@
 package api.resource;
 
+import annotations.Auth;
 import api.domain.Role;
 import api.domain.User;
 import api.service.UserService;
@@ -16,11 +17,13 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Path("/users")
+@Auth
 public class UserResource {
 
     @Inject
@@ -68,7 +71,8 @@ public class UserResource {
     @DELETE
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public void deleteUser(@PathParam("id") Long id) {
+    public Response deleteUser(@PathParam("id") Long id) {
         userService.delete(id);
+        return Response.status(Response.Status.NO_CONTENT).build();
     }
 }
